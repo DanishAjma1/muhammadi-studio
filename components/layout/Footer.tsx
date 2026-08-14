@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Facebook, Instagram, MapPin, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
+import { FacebookIcon, InstagramIcon } from "@/components/common/Icons";
 import { shopSettings } from "@/data";
 import { Logo } from "./Logo";
 import { footerColumns } from "./nav-config";
@@ -23,7 +24,7 @@ export function Footer() {
                 aria-label="Instagram"
                 className="flex size-10 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-gold/50 hover:text-gold"
               >
-                <Instagram className="size-4.5" />
+                <InstagramIcon className="size-5" />
               </a>
               <a
                 href="https://facebook.com"
@@ -32,7 +33,7 @@ export function Footer() {
                 aria-label="Facebook"
                 className="flex size-10 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-gold/50 hover:text-gold"
               >
-                <Facebook className="size-4.5" />
+                <FacebookIcon className="size-5" />
               </a>
             </div>
           </div>

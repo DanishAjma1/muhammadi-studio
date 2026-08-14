@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   keywords: ["barber", "barbershop", "haircut", "fade", "beard", "grooming", "shave"],
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
