@@ -1,7 +1,8 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { CalendarCheck, Instagram, Menu, Phone, User, X } from "lucide-react";
+import { CalendarCheck, Menu, Phone, User, X } from "lucide-react";
+import { InstagramIcon } from "@/components/common/Icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -86,7 +87,7 @@ export function Navbar() {
               aria-label="My account"
               className="hidden size-10 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-gold/50 hover:text-foreground sm:flex"
             >
-              <User className="size-4.5" />
+              <User className="size-5" />
             </Link>
             <Button href="/book" size="sm" className="hidden sm:inline-flex" leftIcon={<CalendarCheck className="size-4" />}>
               Book Now
@@ -171,7 +172,7 @@ export function Navbar() {
                     rel="noreferrer"
                     className="flex items-center gap-2 hover:text-gold"
                   >
-                    <Instagram className="size-4" /> {shopSettings.social.instagram}
+                    <InstagramIcon className="size-4" /> {shopSettings.social.instagram}
                   </a>
                 </div>
               </div>
