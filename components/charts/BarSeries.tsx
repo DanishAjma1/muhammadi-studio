@@ -13,7 +13,8 @@ import {
 import { CHART, ChartTooltip } from "./chartTheme";
 
 interface BarSeriesProps {
-  data: Array<Record<string, string | number>>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any[];
   xKey: string;
   dataKey: string;
   height?: number;
