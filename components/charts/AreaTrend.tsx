@@ -12,7 +12,9 @@ import {
 import { CHART, ChartTooltip } from "./chartTheme";
 
 interface AreaTrendProps {
-  data: Array<Record<string, string | number>>;
+  // recharts types its own chart data as `any[]`; keep parity so any row shape works.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any[];
   xKey: string;
   dataKey: string;
   height?: number;
