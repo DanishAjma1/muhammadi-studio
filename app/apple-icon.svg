@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="0" fill="#0B0B0B"/>
+  <g fill="none" stroke="#C9A227" stroke-width="30" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="168" cy="356" r="52"/>
+    <circle cx="310" cy="356" r="52"/>
+    <path d="M198 322 L420 132"/>
+    <path d="M280 322 L150 132"/>
+  </g>
+  <circle cx="239" cy="250" r="16" fill="#E0B93D"/>
+  <text x="256" y="470" font-family="Georgia, serif" font-size="52" font-weight="700" fill="#F5F5F5" text-anchor="middle" letter-spacing="4">B&amp;CO.</text>
+</svg>

@@ -34,8 +34,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           className={cn(
             "h-11 w-full rounded-xl border bg-secondary px-3.5 text-sm text-foreground placeholder:text-faint transition-colors",
             "focus:outline-none focus:ring-2 focus:ring-gold/40 focus:border-gold/50",
-            leftIcon && "pl-10",
-            rightIcon && "pr-10",
+            !!leftIcon && "pl-10",
+            !!rightIcon && "pr-10",
             error ? "border-error/60" : "border-border",
             className,
           )}
