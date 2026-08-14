@@ -7,7 +7,7 @@ const u = (id: string, w = 1200) =>
 export const img = {
   heroPrimary: u("1503951914875-452162b0f3f1", 1600),
   heroSecondary: u("1585747860715-2ba37e788b70", 1400),
-  aboutShop: u("1521490878406-4d8c40a5e3c1", 1200),
+  aboutShop: u("1585747860715-2ba37e788b70", 1200),
   aboutCraft: u("1622286342621-4bd786c2447c", 1000),
   ctaBanner: u("1599351431202-1e0f0137899a", 1600),
   contactShop: u("1600948836101-f9ffda59d250", 1400),
@@ -30,7 +30,7 @@ export const barberImages = {
   },
   omar: {
     avatar: "https://i.pravatar.cc/400?img=51",
-    cover: u("1521490878406-4d8c40a5e3c1", 1200),
+    cover: u("1596728325488-58c87691e9af", 1200),
   },
 };
 
@@ -40,7 +40,7 @@ export const galleryImages = [
   u("1503951914875-452162b0f3f1", 800),
   u("1585747860715-2ba37e788b70", 800),
   u("1622286342621-4bd786c2447c", 800),
-  u("1521490878406-4d8c40a5e3c1", 800),
+  u("1516975080664-ed2fc6a32937", 800),
   u("1600948836101-f9ffda59d250", 800),
   u("1512690459411-b9245aed614b", 800),
   u("1605497788044-5a32c7078486", 800),
@@ -55,7 +55,7 @@ export const blogImages = [
   u("1503951914875-452162b0f3f1", 900),
   u("1622286342621-4bd786c2447c", 900),
   u("1585747860715-2ba37e788b70", 900),
-  u("1521490878406-4d8c40a5e3c1", 900),
+  u("1521123845560-14093637aa7d", 900),
 ];
 
 // Avatar helper for customers / reviewers
