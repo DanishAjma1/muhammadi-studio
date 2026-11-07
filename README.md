@@ -2,6 +2,9 @@
 
 A complete, full-featured web application for **Muhammadi Studio**, a premier photography, cinematography, and movie production house co-founded by **Attiq Butt** and founded by **Muhammad Usman**.
 
+- 🌐 **Live Website**: [https://muhammadi-studio.vercel.app](https://muhammadi-studio.vercel.app)
+- 📦 **GitHub Repository**: [https://github.com/DanishAjma1/muhammadi-studio](https://github.com/DanishAjma1/muhammadi-studio)
+
 > **Client Discovery → Portfolio → Services & Packages → Choose Director / Artist → Schedule Shoot → Book Session → Gmail SMTP Notification → Studio Production Dashboard.**
 
 ---
