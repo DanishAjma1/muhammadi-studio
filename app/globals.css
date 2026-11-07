@@ -1,8 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap");
 @import "tailwindcss";
 
 /* ============================================================
-   BARBER & CO. — Design System
-   Luxury • Masculine • Modern • Premium
+   MUHAMMADI STUDIO — Design System
+   Cinematic • Royal Gold • Dark Slate • Luxury
    ============================================================ */
 
 @theme {
@@ -33,8 +34,8 @@
   --color-info: #3b82f6;
 
   /* Fonts */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-manrope), var(--font-inter), sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Manrope", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Radius */
   --radius-xl: 1rem;
