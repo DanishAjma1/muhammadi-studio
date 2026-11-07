@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import { Clock, MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
 import { Button } from "@/components/core";
 import { PageHeader, Reveal } from "@/components/common";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { shopSettings } from "@/data";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Visit us downtown. Get directions, call, or message us on WhatsApp.",
+  title: "Contact & Studio Location",
+  description: "Visit Muhammadi Studio downtown. Get directions, call, message on WhatsApp, or send an inquiry via Gmail SMTP.",
 };
 
 export default function ContactPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Come see us"
-        title="Contact & location"
-        subtitle="Walk in or book ahead. We're in the heart of downtown, open seven days a week."
+        eyebrow="Get in Touch"
+        title="Contact &amp; Studio Location"
+        subtitle="Visit our soundstage, book a creative consultation with Co-Founder Attiq Butt, or send us a message with instant Gmail notification."
       />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
@@ -28,9 +28,9 @@ export default function ContactPage() {
                 Directions
               </Button>
               <Button href={`tel:${shopSettings.phone}`} variant="secondary" leftIcon={<Phone className="size-4" />}>
-                Call us
+                Call Studio
               </Button>
-              <Button href="https://wa.me/15551002014" variant="secondary" leftIcon={<MessageCircle className="size-4" />}>
+              <Button href="https://wa.me/15558407890" variant="secondary" leftIcon={<MessageCircle className="size-4" />}>
                 WhatsApp
               </Button>
             </div>
@@ -38,14 +38,14 @@ export default function ContactPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <Reveal className="rounded-2xl border border-border bg-card p-6">
                 <MapPin className="mb-3 size-5 text-gold" />
-                <h3 className="font-semibold text-foreground">Address</h3>
+                <h3 className="font-semibold text-foreground">Studio Address</h3>
                 <p className="mt-1 text-sm text-muted">{shopSettings.address}</p>
                 <p className="mt-3 text-sm text-muted">{shopSettings.phone}</p>
                 <p className="text-sm text-muted">{shopSettings.email}</p>
               </Reveal>
               <Reveal delay={0.1} className="rounded-2xl border border-border bg-card p-6">
                 <Clock className="mb-3 size-5 text-gold" />
-                <h3 className="font-semibold text-foreground">Opening hours</h3>
+                <h3 className="font-semibold text-foreground">Studio Hours</h3>
                 <ul className="mt-2 space-y-1 text-sm">
                   {shopSettings.hours.map((h) => (
                     <li key={h.day} className="flex justify-between gap-3">
@@ -61,18 +61,23 @@ export default function ContactPage() {
 
             <div className="overflow-hidden rounded-2xl border border-border">
               <iframe
-                title="Shop location"
+                title="Muhammadi Studio location"
                 className="h-64 w-full grayscale"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps?q=downtown+barber+shop&output=embed"
+                src="https://www.google.com/maps?q=media+city+photography+studio&output=embed"
               />
             </div>
           </div>
 
           {/* Form */}
           <div>
-            <h2 className="heading mb-5 text-2xl text-foreground">Send us a message</h2>
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="heading text-2xl text-foreground">Send an Inquiry</h2>
+              <span className="flex items-center gap-1.5 text-xs text-gold">
+                <Mail className="size-3.5" /> Gmail SMTP Connected
+              </span>
+            </div>
             <ContactForm />
           </div>
         </div>

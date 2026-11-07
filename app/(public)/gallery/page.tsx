@@ -4,17 +4,17 @@ import { GalleryGrid } from "@/components/gallery/GalleryGrid";
 import { gallery } from "@/data";
 
 export const metadata: Metadata = {
-  title: "Gallery",
-  description: "A look at the cuts, fades, beard work and styling from our chairs.",
+  title: "Visual Portfolio & Film Stills",
+  description: "Explore cinematic wedding films, royal bridal portraits, fashion editorial, and commercial campaigns by Muhammadi Studio.",
 };
 
 export default function GalleryPage() {
   return (
     <>
       <PageHeader
-        eyebrow="The work"
-        title="Gallery"
-        subtitle="Real cuts from real clients. Filter by style and tap any shot to view it larger."
+        eyebrow="The Portfolio"
+        title="Visual Poetry in Stills &amp; Motion"
+        subtitle="Real productions for real clients. Filter by category and tap any shot to inspect in high resolution."
       />
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16">
         <GalleryGrid items={gallery} />

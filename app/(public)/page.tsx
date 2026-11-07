@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Award, Star, Users } from "lucide-react";
+import { ArrowRight, Award, Film, Star, Users } from "lucide-react";
 import { Button } from "@/components/core";
 import { CTABand, Reveal, SectionHeading } from "@/components/common";
 import { Hero } from "@/components/home/Hero";
@@ -32,9 +32,9 @@ export default function LandingPage() {
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="What we do"
-            title="Signature services"
-            subtitle="Precision cuts and premium grooming, priced honestly. Every service is booked in seconds."
+            eyebrow="Cinematic Craft"
+            title="Signature Packages &amp; Services"
+            subtitle="From 4K multi-camera wedding films to royal bridal photography, studio headshots, and commercial ads."
           />
           <Button href="/services" variant="ghost" rightIcon={<ArrowRight className="size-4" />}>
             View all services
@@ -53,19 +53,19 @@ export default function LandingPage() {
       <section className="border-y border-border bg-secondary">
         <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 sm:py-28 lg:grid-cols-2 lg:items-center">
           <Reveal className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border">
-            <Image src={img.aboutShop} alt="Inside the shop" fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" />
+            <Image src={img.aboutShop} alt="Inside Muhammadi Studio" fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" />
           </Reveal>
           <div>
             <SectionHeading
-              eyebrow="More than a haircut"
-              title={<>We&apos;re about confidence, craftsmanship &amp; community.</>}
-              subtitle="Since 2014, we&apos;ve helped thousands of gentlemen look and feel their best. Skilled barbers, premium products, and an atmosphere built for you to unwind."
+              eyebrow="Muhammadi Studio · Co-Founder: Attiq Butt"
+              title={<>Capturing emotion, human beauty &amp; timeless cinematic art.</>}
+              subtitle="Founded with a devotion to the moving image and fine-art still photography, Muhammadi Studio brings together visionary Co-Founder Attiq Butt and Master Photographer Muhammad Usman. We blend high-end cinema sensors, calibrated lighting, and narrative film direction to turn your moments into cinematic heirlooms."
             />
             <div className="mt-8 grid grid-cols-3 gap-4">
               {[
-                { icon: Award, value: `${shopStats.yearsExperience}+`, label: "Years" },
-                { icon: Users, value: `${formatCompact(shopStats.clients)}+`, label: "Clients" },
-                { icon: Star, value: `${shopStats.rating}★`, label: "Rating" },
+                { icon: Award, value: `${shopStats.yearsExperience}+`, label: "Years Experience" },
+                { icon: Users, value: `${formatCompact(shopStats.clients)}+`, label: "Productions" },
+                { icon: Star, value: `${shopStats.rating}★`, label: "Client Rating" },
               ].map((stat) => (
                 <div key={stat.label} className="rounded-2xl border border-border bg-card p-5 text-center">
                   <stat.icon className="mx-auto mb-2 size-5 text-gold" />
@@ -74,19 +74,28 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-            <Button href="/about" className="mt-8" variant="secondary" rightIcon={<ArrowRight className="size-4" />}>
-              Our story
-            </Button>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="/about" variant="secondary" rightIcon={<ArrowRight className="size-4" />}>
+                Read Our Story
+              </Button>
+              <Button href="/barbers" variant="ghost" rightIcon={<Film className="size-4" />}>
+                Meet Attiq Butt &amp; Team
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Barbers */}
+      {/* Team / Cinematographers */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
         <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading eyebrow="The team" title="Meet the barbers" subtitle="Master craftsmen, each with their own signature style." />
+          <SectionHeading
+            eyebrow="Creative Direction"
+            title="Meet Our Cinematographers &amp; Artists"
+            subtitle="Led by Co-Founder Attiq Butt, our crew of filmmakers, aerial drone pilots, and master photographers bring cinematic mastery to every shoot."
+          />
           <Button href="/barbers" variant="ghost" rightIcon={<ArrowRight className="size-4" />}>
-            All barbers
+            All team members
           </Button>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -102,9 +111,13 @@ export default function LandingPage() {
       <section className="border-t border-border bg-secondary">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
           <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
-            <SectionHeading eyebrow="The work" title="Fresh from the chair" subtitle="A look at the cuts, fades and beard work walking out our door." />
+            <SectionHeading
+              eyebrow="Visual Portfolio"
+              title="Recent Frames &amp; Film Stills"
+              subtitle="A curated glimpse into our wedding cinema, editorial portraits, commercial campaigns, and drone aerials."
+            />
             <Button href="/gallery" variant="ghost" rightIcon={<ArrowRight className="size-4" />}>
-              Full gallery
+              Full portfolio
             </Button>
           </div>
           <GalleryGrid items={gallery.slice(0, 8)} filterable={false} />
@@ -113,7 +126,7 @@ export default function LandingPage() {
 
       {/* Reviews */}
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
-        <SectionHeading align="center" eyebrow="Reviews" title="What our clients say" className="mb-12" />
+        <SectionHeading align="center" eyebrow="Testimonials" title="Words from Our Couples &amp; Clients" className="mb-12" />
         <div className="grid gap-5 lg:grid-cols-3">
           {featuredReviews.map((r, i) => (
             <Reveal key={r.id} delay={i * 0.08}>
@@ -137,7 +150,7 @@ export default function LandingPage() {
             </p>
           </div>
           <Link href="/reviews" className="text-sm font-medium text-gold hover:underline">
-            {formatCompact(googleRating.count)} reviews
+            {formatCompact(googleRating.count)} verified reviews
           </Link>
         </Reveal>
       </section>

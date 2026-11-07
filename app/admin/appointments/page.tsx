@@ -63,8 +63,8 @@ export default function AdminAppointmentsPage() {
         </div>
       ),
     },
-    { key: "service", header: "Service", width: 160, sortable: true, sortValue: (a) => a.serviceName, cell: (a) => a.serviceName },
-    { key: "barber", header: "Barber", width: 150, sortable: true, sortValue: (a) => a.barberName, cell: (a) => a.barberName },
+    { key: "service", header: "Production Service", width: 180, sortable: true, sortValue: (a) => a.serviceName, cell: (a) => a.serviceName },
+    { key: "barber", header: "Director / Artist", width: 170, sortable: true, sortValue: (a) => a.barberName, cell: (a) => a.barberName },
     {
       key: "price",
       header: "Price",

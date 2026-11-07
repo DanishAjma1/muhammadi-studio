@@ -4,15 +4,15 @@ import { ServiceCard } from "@/components/services/ServiceCard";
 import { img, services } from "@/data";
 
 export const metadata: Metadata = {
-  title: "Services",
-  description: "Haircuts, fades, beard styling, hot towel shaves and premium packages.",
+  title: "Services & Production Packages",
+  description: "Cinematic wedding films, royal bridal photography, 4K commercial videos, drone coverage, and signature packages.",
 };
 
 const groups = [
-  { key: "haircut", label: "Haircuts" },
-  { key: "beard", label: "Beard" },
-  { key: "shave", label: "Shaves" },
-  { key: "package", label: "Packages" },
+  { key: "cinematography", label: "Cinematography & Films" },
+  { key: "photography", label: "Photography & Stills" },
+  { key: "package", label: "Signature Production Packages" },
+  { key: "commercial", label: "Commercial & Music Videos" },
 ] as const;
 
 export default function ServicesPage() {
@@ -20,9 +20,9 @@ export default function ServicesPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Our menu"
-        title="Services & pricing"
-        subtitle="Honest pricing, no surprises. Pick a service and book your chair in seconds."
+        eyebrow="Muhammadi Studio Menu"
+        title="Production Services &amp; Packages"
+        subtitle="Transparent investments, world-class production standards. Select your package and reserve your date in seconds."
         image={img.heroSecondary}
       />
 

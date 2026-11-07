@@ -1,104 +1,91 @@
-# 💈 Barber & Co. — Premium Barbershop Mockup
+# 🎬 Muhammadi Studio — High-End Cinematography & Photography Web App
 
-A fully interactive, front-end-only mockup for a premium barbershop brand — built to demonstrate the complete business flow:
+A complete, full-featured web application for **Muhammadi Studio**, a premier photography, cinematography, and movie production house co-founded by **Attiq Butt** and founded by **Muhammad Usman**.
 
-> **Instagram → Website → Choose service → Choose barber → Choose time → Book → Shop dashboard.**
-
-No backend or database. Every page, button, form and modal works using in-memory state (Zustand), so the whole product can be demoed end-to-end.
+> **Client Discovery → Portfolio → Services & Packages → Choose Director / Artist → Schedule Shoot → Book Session → Gmail SMTP Notification → Studio Production Dashboard.**
 
 ---
 
-## ✨ Highlights
+## ✨ Features & Highlights
 
-- **Premium dark + gold theme** — luxury, masculine, modern (not the cliché barber pole).
-- **Reusable component system** — `components/core` (buttons, badges, avatar, inputs, modal, switch, toast, stats card, spinner, **data table with resizable columns + CSV export**, and more) and `components/charts` (Recharts wrappers).
-- **New-style navigation** — floating pill nav with a sliding gold active indicator + full-screen animated mobile menu.
-- **Multi-step booking flow** that writes real appointments to the store.
-- **Full customer account** — dashboard, appointments (cancel/reschedule), profile with a working edit modal.
-- **Complete shop admin** — dashboard, appointments, calendar, customers, barbers & services CRUD, revenue, analytics, notifications, settings — with a **fixed sidebar + top bar (content-only scroll)** and a **dummy admin login gate**.
-- **Mobile-first & responsive** everywhere, with subtle Motion animations.
+- **Bespoke Luxury Visuals**: Signature dark + gold aesthetic tailored for high-end cinema, weddings, fashion editorial, and commercial brand productions.
+- **Co-Founder & Creative Direction**: Featuring Co-Founder & Director of Cinematography **Attiq Butt**, Founder & Master Photographer **Muhammad Usman**, Drone Specialist **Farhan Tariq**, and Fashion Director **Ayesha Noor**.
+- **Gmail Notification System using SMTP**:
+  - Direct integration with Google's SMTP servers (`smtp.gmail.com:465`).
+  - Automated HTML email dispatch with dark + gold Muhammadi Studio branding.
+  - Sends lead alerts to the studio admin and instant confirmation receipts to clients.
+  - Includes smart fallback simulation mode when SMTP credentials are not yet configured in development.
+  - Admin settings panel with a live **"Send Test Gmail Notification"** button.
+- **Multi-Step Production Booking Wizard**:
+  - Step 1: Select signature production package (Wedding Cinema, Royal Bridal Shoot, Commercial Film, Studio Portraits, 4K Drone).
+  - Step 2: Choose Lead Artist / Director (Attiq Butt, Muhammad Usman, Farhan Tariq, Ayesha Noor, or Any Available).
+  - Step 3: Date selection.
+  - Step 4: Available call times.
+  - Step 5: Contact details, venue notes, and instant confirmation.
+- **Client Portal**: Dashboard, shoot reservations, rescheduling, and profile management.
+- **Studio Admin Portal**:
+  - Live production KPIs and revenue trends.
+  - Call-sheet calendar (day & week views).
+  - Complete CRUD for production packages and team members.
+  - Gmail SMTP configuration status card and live test tool.
+  - Client database and review moderation.
 
 ---
 
-## 🚀 Getting started
+## 📧 Gmail SMTP Setup Instructions
 
-This project uses **[Bun](https://bun.sh)**.
+To activate live email notifications via Google's SMTP:
 
-```bash
-bun install
-bun dev        # start the dev server → http://localhost:3000
-bun run build  # production build
-bun run start  # serve the production build
+1. Open your **Google Account** ([https://myaccount.google.com/](https://myaccount.google.com/)).
+2. Navigate to **Security** and ensure **2-Step Verification** is enabled.
+3. Search for **"App passwords"** in the top search bar (or under 2-Step Verification).
+4. Enter an App Name (e.g., `Muhammadi Studio`) and click **Create**.
+5. Google will display a 16-character code (e.g., `abcd efgh ijkl mnop`).
+6. Copy that code and paste it into your `.env.local` file:
+
+```env
+GMAIL_USER=your_email@gmail.com
+GMAIL_APP_PASSWORD=abcd efgh ijkl mnop
+NOTIFICATION_RECIPIENT=attiq@muhammadistudio.com
+SMTP_FROM_NAME="Muhammadi Studio"
 ```
 
-> **Note on Next.js:** this repo pins a build of **Next.js 16** whose conventions can differ from older docs. The framework re-writes `AGENTS.md` on `next dev`; that block is committed intentionally to keep the tree clean.
+*(Note: Spaces in the password are automatically handled).*
 
-### 🔐 Demo admin login
+---
 
-The admin area is gated by a dummy login:
+## 🔐 Studio Admin Demo Login
+
+The studio dashboard is gated by an administrative login:
 
 ```
-Email:    admin@barberand.co
+Email:    attiq@muhammadistudio.com
 Password: admin123
 ```
 
-(Any values are accepted — it's a mockup.) The public site and customer account start "signed in" as a demo customer.
-
 ---
 
-## 🗂️ Project structure
+## 🚀 Getting Started
 
-```
-app/
-├─ (public)/            # Public site (clean URLs via a route group)
-│  ├─ page.tsx          #   / landing
-│  ├─ about, services, barbers/[slug], gallery, reviews,
-│  │  contact, faq, blog/[slug], social
-│  ├─ book/, book/success/     # multi-step booking + confirmation
-│  ├─ login/, register/        # auth
-│  └─ account/                 # customer dashboard, appointments, profile
-├─ admin/               # Shop dashboard (own fixed shell) + /admin/login
-├─ layout.tsx           # root layout (fonts, ToastProvider, metadata)
-├─ globals.css          # design system (palette, fonts, animations, utilities)
-└─ icon.svg             # brand comb mark (favicon)
+```bash
+# Run development server
+npm run dev
+# or: ./node_modules/.bin/next dev
 
-components/
-├─ core/                # reusable UI primitives (the design system)
-├─ charts/              # reusable Recharts wrappers
-├─ layout/              # navbar, footer, mobile book bar, logo
-├─ common/              # Reveal, SectionHeading, PageHeader, CTABand, icons
-├─ home/ services/ barbers/ reviews/ gallery/ blog/
-│  contact/ booking/ account/ auth/ admin/   # page-scoped components
+# Production build
+npm run build
+# or: ./node_modules/.bin/next build
 
-data/       # seeded mock data + centralized image URLs (data/images.ts)
-hooks/      # api-style hooks over the stores (useAppointments, useBarbers, …)
-store/      # Zustand: dataStore (mutable "db"), authStore, adminAuthStore, bookingStore
-types/      # domain model
-lib/        # utils (cn, formatters, CSV export)
+# Start production server
+npm start
+# or: ./node_modules/.bin/next start
 ```
 
-**Images** are all Unsplash / pravatar URLs centralized in [`data/images.ts`](data/images.ts) — swap any of them in one place. `next.config.ts` runs images `unoptimized` so remote placeholders load without an optimizer.
-
 ---
 
-## 🎨 Design tokens
+## 🧱 Tech Stack
 
-| Token | Value |
-| --- | --- |
-| Background / Secondary / Card | `#0B0B0B` / `#121212` / `#181818` |
-| Text / Muted | `#F5F5F5` / `#A1A1AA` |
-| Gold / Gold hover | `#C9A227` / `#E0B93D` |
-| Border | `#272727` |
-| Success / Error | `#22C55E` / `#EF4444` |
-
-Fonts: **Inter** (body) + **Manrope** (display).
-
----
-
-## 🧱 Tech stack
-
-Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Zustand · Recharts · Motion · React Hook Form · lucide-react.
-
----
-
-> This is a design/UX mockup. Data lives in memory and resets on refresh — there is no backend, payments or persistence.
+- **Framework**: Next.js 16 (App Router)
+- **UI & State**: React 19, Tailwind CSS v4, Zustand, Motion
+- **Mailing**: Nodemailer (Gmail SMTP: `smtp.gmail.com`)
+- **Visuals & Charts**: Lucide React, Recharts

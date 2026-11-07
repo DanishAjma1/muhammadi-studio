@@ -18,12 +18,23 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: "Barber & Co. — Premium Grooming for the Modern Gentleman",
-    template: "%s · Barber & Co.",
+    default: "Muhammadi Studio — Premium Photography & Cinematic Movie Production",
+    template: "%s · Muhammadi Studio",
   },
   description:
-    "Premium barbershop offering haircuts, fades, beard styling and hot towel shaves. Book your appointment in under a minute.",
-  keywords: ["barber", "barbershop", "haircut", "fade", "beard", "grooming", "shave"],
+    "Muhammadi Studio is an acclaimed photography and filmmaking production studio co-founded by Attiq Butt. Specializing in 4K cinematic wedding movies, royal portraits, commercials, and high-fashion editorial.",
+  keywords: [
+    "Muhammadi Studio",
+    "Attiq Butt",
+    "Muhammad Usman",
+    "photography studio",
+    "cinematography",
+    "wedding films",
+    "movie maker",
+    "commercial video production",
+    "4K drone shoots",
+    "film production",
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -40,7 +40,7 @@ export default function AdminCalendarPage() {
     barberId === "all" ? appointments : appointments.filter((a) => a.barberId === barberId);
 
   const barberOptions = [
-    { label: "All barbers", value: "all" },
+    { label: "All Directors & Artists", value: "all" },
     ...barbers.map((b) => ({ label: b.name, value: b.id })),
   ];
 

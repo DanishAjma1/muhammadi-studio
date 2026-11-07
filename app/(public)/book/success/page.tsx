@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { CalendarPlus, Check, Clock, MapPin, Navigation, Scissors, User } from "lucide-react";
+import { CalendarPlus, Camera, Check, Clock, MailCheck, MapPin, Navigation, User } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/core";
 import { useBookingStore } from "@/store/bookingStore";
@@ -28,9 +28,9 @@ export default function BookingSuccessPage() {
     return (
       <div className="mx-auto max-w-md px-4 pt-40 pb-24 text-center">
         <h1 className="heading text-2xl text-foreground">No booking found</h1>
-        <p className="mt-2 text-muted">Looks like you haven&apos;t booked yet.</p>
+        <p className="mt-2 text-muted">Looks like you haven&apos;t booked a shoot yet.</p>
         <Button href="/book" className="mt-6">
-          Book an appointment
+          Book a production session
         </Button>
       </div>
     );
@@ -41,7 +41,7 @@ export default function BookingSuccessPage() {
   const calUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
     `${booking.serviceName} — ${shopSettings.name}`,
   )}&dates=${gcal(start)}/${gcal(end)}&location=${encodeURIComponent(shopSettings.address)}&details=${encodeURIComponent(
-    `Appointment with ${booking.barberName}`,
+    `Production session directed by ${booking.barberName}`,
   )}`;
 
   return (
@@ -61,11 +61,15 @@ export default function BookingSuccessPage() {
         transition={{ delay: 0.15 }}
         className="mt-6 text-center"
       >
-        <p className="eyebrow mb-2">You&apos;re booked</p>
-        <h1 className="heading text-3xl text-foreground sm:text-4xl">See you soon!</h1>
+        <p className="eyebrow mb-2">Shoot Reserved</p>
+        <h1 className="heading text-3xl text-foreground sm:text-4xl">Session Confirmed!</h1>
         <p className="mt-3 text-muted">
-          A confirmation has been sent to your phone. We can&apos;t wait to have you in the chair.
+          A confirmation and production sheet notification has been sent via Gmail SMTP. We can&apos;t wait to bring your vision to life on set.
         </p>
+        <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs text-gold">
+          <MailCheck className="size-4" />
+          <span>Notification dispatched to {shopSettings.name} lead team</span>
+        </div>
       </motion.div>
 
       <motion.div
@@ -79,9 +83,9 @@ export default function BookingSuccessPage() {
           <p className="text-sm text-gold">{formatCurrency(booking.price)}</p>
         </div>
         <dl className="space-y-3 px-6 py-5 text-sm">
-          <Row icon={<User className="size-4" />} label="Barber" value={booking.barberName} />
-          <Row icon={<Scissors className="size-4" />} label="Date" value={formatDate(booking.date, "weekday")} />
-          <Row icon={<Clock className="size-4" />} label="Time" value={`${booking.time} · ${booking.durationMin} min`} />
+          <Row icon={<User className="size-4" />} label="Lead Artist" value={booking.barberName} />
+          <Row icon={<Camera className="size-4" />} label="Date" value={formatDate(booking.date, "weekday")} />
+          <Row icon={<Clock className="size-4" />} label="Call Time" value={`${booking.time} · ${booking.durationMin} min`} />
           <Row icon={<MapPin className="size-4" />} label="Location" value={`${shopSettings.name}, ${shopSettings.address}`} />
         </dl>
       </motion.div>
@@ -91,12 +95,12 @@ export default function BookingSuccessPage() {
           Add to calendar
         </Button>
         <Button href="https://maps.google.com" variant="secondary" leftIcon={<Navigation className="size-4" />}>
-          Get directions
+          Studio directions
         </Button>
       </div>
       <div className="mt-3 flex flex-col gap-3 sm:flex-row">
         <Button href="/account/appointments" fullWidth>
-          View my appointments
+          View my shoot bookings
         </Button>
         <Link
           href="/"
@@ -113,7 +117,7 @@ function Row({ icon, label, value }: { icon: React.ReactNode; label: string; val
   return (
     <div className="flex items-center gap-3">
       <span className="text-gold">{icon}</span>
-      <span className="w-20 text-muted">{label}</span>
+      <span className="w-24 text-muted">{label}</span>
       <span className="flex-1 text-right font-medium text-foreground">{value}</span>
     </div>
   );

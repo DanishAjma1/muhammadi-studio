@@ -14,9 +14,9 @@ interface AdminAuthState {
 }
 
 const demoAdmin: AdminUser = {
-  name: "James Lee",
-  email: "admin@barberand.co",
-  role: "Owner",
+  name: "Attiq Butt",
+  email: "attiq@muhammadistudio.com",
+  role: "Co-Founder & Creative Director",
 };
 
 export const useAdminAuthStore = create<AdminAuthState>((set) => ({
@@ -27,4 +27,4 @@ export const useAdminAuthStore = create<AdminAuthState>((set) => ({
 }));
 
 // Exposed for the login screen hint.
-export const ADMIN_DEMO_CREDENTIALS = { email: "admin@barberand.co", password: "admin123" };
+export const ADMIN_DEMO_CREDENTIALS = { email: "attiq@muhammadistudio.com", password: "admin123" };

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { CalendarCheck, Scissors, Star } from "lucide-react";
+import { CalendarCheck, Clapperboard, Film, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/core";
 import { avatar, img, shopStats } from "@/data";
 import { formatCompact } from "@/lib/utils";
@@ -26,7 +26,7 @@ export function Hero() {
         style={{ backgroundImage: `url(${img.heroPrimary})` }}
       />
       <div className="hero-vignette absolute inset-0" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-transparent" />
 
       <motion.div
         variants={container}
@@ -34,9 +34,12 @@ export function Hero() {
         animate="show"
         className="relative mx-auto flex w-full max-w-7xl flex-col px-4 pt-28 pb-16 sm:px-6"
       >
-        <motion.div variants={item} className="mb-5 flex items-center gap-2">
-          <span className="flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1 text-xs font-medium tracking-widest text-gold">
-            <Scissors className="size-3.5" /> EST. 2014
+        <motion.div variants={item} className="mb-5 flex flex-wrap items-center gap-2">
+          <span className="flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3.5 py-1 text-xs font-semibold tracking-widest text-gold uppercase">
+            <Clapperboard className="size-3.5" /> Muhammadi Studio
+          </span>
+          <span className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted">
+            <Sparkles className="size-3 text-gold" /> Co-Founder: Attiq Butt
           </span>
         </motion.div>
 
@@ -44,22 +47,21 @@ export function Hero() {
           variants={item}
           className="heading max-w-3xl text-5xl uppercase leading-[0.95] text-foreground sm:text-7xl lg:text-8xl"
         >
-          Your Style.
+          Cinematic Vision.
           <br />
-          <span className="text-gradient-gold">Our Craft.</span>
+          <span className="text-gradient-gold">Timeless Stories.</span>
         </motion.h1>
 
-        <motion.p variants={item} className="mt-6 max-w-md text-lg leading-relaxed text-muted">
-          Premium grooming for the modern gentleman. Sharp cuts, clean fades and timeless styling
-          in the heart of downtown.
+        <motion.p variants={item} className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
+          Premier cinematography and fine art photography studio. We direct breathtaking 4K wedding films, royal bridal portraits, fashion editorial, and commercial brand movies.
         </motion.p>
 
         <motion.div variants={item} className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button href="/book" size="lg" leftIcon={<CalendarCheck className="size-5" />}>
-            Book Appointment
+            Book a Shoot Session
           </Button>
-          <Button href="/services" size="lg" variant="outline">
-            View Services
+          <Button href="/services" size="lg" variant="outline" leftIcon={<Film className="size-5" />}>
+            Explore Packages
           </Button>
         </motion.div>
 
@@ -74,7 +76,7 @@ export function Hero() {
                 <Star key={i} className="size-4 text-gold" fill="currentColor" />
               ))}
             </div>
-            <span className="text-sm font-semibold text-foreground">{shopStats.rating}</span>
+            <span className="text-sm font-semibold text-foreground">{shopStats.rating}★</span>
           </div>
           <div className="flex items-center gap-3">
             <div className="flex -space-x-3">
@@ -89,12 +91,11 @@ export function Hero() {
             </div>
             <span className="text-sm text-muted">
               <span className="font-semibold text-foreground">{formatCompact(shopStats.clients)}+</span>{" "}
-              happy clients
+              couples &amp; brands
             </span>
           </div>
           <div className="text-sm text-muted">
-            <span className="font-semibold text-foreground">{shopStats.yearsExperience}+</span> years
-            experience
+            <span className="font-semibold text-foreground">{shopStats.yearsExperience}+</span> years of filmmaking excellence
           </div>
         </motion.div>
       </motion.div>

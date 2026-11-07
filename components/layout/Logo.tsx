@@ -5,23 +5,23 @@ export function Logo({ className, compact }: { className?: string; compact?: boo
   return (
     <Link href="/" className={cn("group flex items-center gap-2.5", className)}>
       <span className="relative flex size-9 items-center justify-center rounded-xl bg-gold/10 ring-1 ring-gold/30 transition-transform group-hover:scale-105">
-        <svg viewBox="0 0 512 512" className="size-5" aria-hidden>
-          <g fill="#C9A227">
-            <rect x="104" y="150" width="304" height="62" rx="28" />
-            <rect x="124" y="196" width="20" height="150" rx="10" />
-            <rect x="160" y="196" width="20" height="150" rx="10" />
-            <rect x="196" y="196" width="20" height="150" rx="10" />
-            <rect x="232" y="196" width="20" height="150" rx="10" />
-            <rect x="268" y="196" width="20" height="150" rx="10" />
-            <rect x="304" y="196" width="20" height="150" rx="10" />
-            <rect x="340" y="196" width="20" height="150" rx="10" />
-            <rect x="376" y="196" width="20" height="150" rx="10" />
-          </g>
+        {/* Cinema Camera / Aperture Shutter Icon */}
+        <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="#C9A227" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+          <path d="m10 7 5 3-5 3z" fill="#C9A227" stroke="none" />
+          <rect x="2" y="4" width="20" height="16" rx="4" />
+          <path d="M2 8h20" />
+          <circle cx="6" cy="6" r="1" fill="#C9A227" />
+          <circle cx="10" cy="6" r="1" fill="#C9A227" />
         </svg>
       </span>
       {!compact && (
-        <span className="heading text-lg font-extrabold uppercase tracking-tight text-foreground">
-          Barber<span className="text-gold">&amp;</span>Co.
+        <span className="flex flex-col leading-tight">
+          <span className="heading text-lg font-extrabold uppercase tracking-tight text-foreground">
+            Muhammadi<span className="text-gold">Studio</span>
+          </span>
+          <span className="text-[9px] uppercase tracking-widest text-muted font-medium">
+            Films &amp; Photography
+          </span>
         </span>
       )}
     </Link>

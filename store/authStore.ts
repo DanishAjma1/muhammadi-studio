@@ -27,8 +27,8 @@ const demoUser: AuthUser = {
   email: "ahmed.khan@email.com",
   phone: "+1 (555) 201-4471",
   avatar: avatar(11),
-  favoriteBarberId: "brb_alex",
-  favoriteServiceId: "svc_hair_beard",
+  favoriteBarberId: "brb_attiq",
+  favoriteServiceId: "svc_signature_royal",
 };
 
 export const useAuthStore = create<AuthState>((set) => ({

@@ -6,8 +6,8 @@ export interface NavLink {
 // Primary links shown in the desktop navbar
 export const primaryLinks: NavLink[] = [
   { href: "/services", label: "Services" },
-  { href: "/barbers", label: "Barbers" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/barbers", label: "Cinematographers" },
+  { href: "/gallery", label: "Portfolio" },
   { href: "/reviews", label: "Reviews" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
@@ -16,38 +16,38 @@ export const primaryLinks: NavLink[] = [
 // Secondary links surfaced in the mobile menu + footer
 export const secondaryLinks: NavLink[] = [
   { href: "/faq", label: "FAQ" },
-  { href: "/blog", label: "Style Guide" },
+  { href: "/blog", label: "Cinema Insights" },
   { href: "/social", label: "Instagram" },
-  { href: "/account", label: "My Account" },
-  { href: "/admin", label: "Admin" },
+  { href: "/account", label: "Client Portal" },
+  { href: "/admin", label: "Studio Admin" },
 ];
 
 export const footerColumns: { title: string; links: NavLink[] }[] = [
   {
-    title: "Visit",
+    title: "Production",
     links: [
-      { href: "/services", label: "Services" },
-      { href: "/barbers", label: "Barbers" },
-      { href: "/gallery", label: "Gallery" },
-      { href: "/book", label: "Book Now" },
+      { href: "/services", label: "Films & Photography" },
+      { href: "/barbers", label: "Directors & Artists" },
+      { href: "/gallery", label: "Visual Portfolio" },
+      { href: "/book", label: "Book a Shoot" },
     ],
   },
   {
-    title: "Company",
+    title: "Muhammadi Studio",
     links: [
-      { href: "/about", label: "About" },
-      { href: "/reviews", label: "Reviews" },
-      { href: "/blog", label: "Style Guide" },
-      { href: "/contact", label: "Contact" },
+      { href: "/about", label: "Our Story & Co-Founders" },
+      { href: "/reviews", label: "Client Reviews" },
+      { href: "/blog", label: "Cinema Insights" },
+      { href: "/contact", label: "Contact & Location" },
     ],
   },
   {
-    title: "Account",
+    title: "Client Portal",
     links: [
       { href: "/account", label: "Dashboard" },
-      { href: "/account/appointments", label: "My Appointments" },
+      { href: "/account/appointments", label: "My Shoot Bookings" },
       { href: "/login", label: "Sign In" },
-      { href: "/admin", label: "Shop Admin" },
+      { href: "/admin", label: "Studio Admin" },
     ],
   },
 ];

@@ -38,7 +38,7 @@ export default async function BlogPostPage({
     <>
       <article className="mx-auto max-w-3xl px-4 pt-28 sm:px-6 sm:pt-36">
         <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-gold">
-          <ArrowLeft className="size-4" /> Back to Style Guide
+          <ArrowLeft className="size-4" /> Back to Cinema Insights
         </Link>
 
         <div className="mt-6 flex items-center gap-3">
@@ -55,7 +55,13 @@ export default async function BlogPostPage({
           <Avatar name={post.author} size="sm" />
           <div>
             <p className="text-sm font-medium text-foreground">{post.author}</p>
-            <p className="text-xs text-muted">Master Barber</p>
+            <p className="text-xs text-muted">
+              {post.author === "Attiq Butt"
+                ? "Co-Founder & Director of Cinematography"
+                : post.author === "Muhammad Usman"
+                  ? "Founder & Master Photographer"
+                  : "Senior Creative Director"}
+            </p>
           </div>
         </div>
 
@@ -65,7 +71,7 @@ export default async function BlogPostPage({
 
         <div className="prose-invert mt-8 space-y-5 pb-8 text-base leading-relaxed text-muted">
           {post.content.map((para, i) => (
-            <p key={i} className={i === 0 ? "text-lg text-foreground" : undefined}>
+            <p key={i} className={i === 0 ? "text-lg text-foreground font-medium" : undefined}>
               {para}
             </p>
           ))}
@@ -73,7 +79,7 @@ export default async function BlogPostPage({
       </article>
 
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
-        <h2 className="heading mb-8 text-2xl text-foreground">Keep reading</h2>
+        <h2 className="heading mb-8 text-2xl text-foreground">More Insights from Muhammadi Studio</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((p) => (
             <BlogCard key={p.id} post={p} />

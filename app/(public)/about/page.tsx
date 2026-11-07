@@ -1,54 +1,54 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Award, Heart, Scissors, Sparkles } from "lucide-react";
+import { Award, Clapperboard, Heart, Sparkles } from "lucide-react";
 import { CTABand, PageHeader, Reveal, SectionHeading } from "@/components/common";
 import { img, shopStats } from "@/data";
 import { formatCompact } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "More than a haircut — confidence, craftsmanship and community since 2014.",
+  description: "Muhammadi Studio — Co-Founder Attiq Butt and Founder Muhammad Usman. High-end photography and cinema production.",
 };
 
 const values = [
-  { icon: Scissors, title: "Craftsmanship", text: "Every cut is a discipline. We sweat the details so you walk out sharp." },
-  { icon: Heart, title: "Community", text: "A chair, a conversation, a familiar face. We're a fixture of the neighbourhood." },
-  { icon: Sparkles, title: "Premium feel", text: "Hot towels, quality products and an atmosphere built to help you unwind." },
-  { icon: Award, title: "Experience", text: "A team with decades of combined experience across every style." },
+  { icon: Clapperboard, title: "Cinema Grade Craft", text: "We shoot with cinema camera rigs, Zeiss prime lenses, and broadcast wireless audio to ensure every frame belongs on the big screen." },
+  { icon: Heart, title: "Emotive Storytelling", text: "A great movie captures soul. We preserve genuine laughter, quiet tears, and authentic human chemistry without artificial staging." },
+  { icon: Sparkles, title: "DaVinci Color Grading", text: "Every project receives an individualized color grading pass inspired by classic 35mm film stocks and natural warm skin tones." },
+  { icon: Award, title: "Heirloom Quality", text: "From 4K HDR digital deliveries to handcrafted Italian velvet albums, our work is designed to endure for generations." },
 ];
 
 const timeline = [
-  { year: "2014", text: "Opened our doors with a single chair and a big vision." },
-  { year: "2018", text: "Grew to a four-chair shop and welcomed our master barbers." },
-  { year: "2022", text: "Crossed 4,000 loyal clients and a 4.9★ rating." },
-  { year: "2026", text: "Launched online booking — sharp cuts, now a tap away." },
+  { year: "2012", text: "Founded by Muhammad Usman with a focused mission in luxury bridal photography and fine art portraiture." },
+  { year: "2016", text: "Welcomed Attiq Butt as Co-Founder & Director of Cinematography, launching our narrative 4K wedding film and movie production unit." },
+  { year: "2021", text: "Expanded to Studio 4 in Media City with an indoor cyclorama, commercial soundstage, and licensed aerial drone operations." },
+  { year: "2026", text: "Crossed 1,800+ wedding films and commercial productions worldwide with seamless digital booking and Gmail SMTP client alerts." },
 ];
 
 export default function AboutPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Our story"
-        title={<>More than a haircut.</>}
-        subtitle="We're about confidence, craftsmanship and community. Here's how it started."
+        eyebrow="Our Story"
+        title={<>Cinematic Vision. Timeless Stories.</>}
+        subtitle="Founded by Muhammad Usman and co-founded by Attiq Butt — we are a boutique cinematography and photography studio dedicated to visual perfection."
         image={img.aboutCraft}
       />
 
       <section className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 sm:py-20 lg:grid-cols-2 lg:items-center">
         <Reveal className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border">
-          <Image src={img.aboutShop} alt="Our shop" fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" />
+          <Image src={img.aboutShop} alt="Muhammadi Studio Set" fill className="object-cover" sizes="(max-width:1024px) 100vw, 50vw" />
         </Reveal>
         <div>
           <SectionHeading
-            eyebrow="Since 2014"
-            title="Built on a simple belief"
-            subtitle="A great haircut changes how you carry yourself. We've spent over a decade perfecting that feeling — one client, one cut at a time."
+            eyebrow="The Muhammadi Legacy"
+            title="The Vision Behind the Lens"
+            subtitle="At Muhammadi Studio, Co-Founder Attiq Butt and Founder Muhammad Usman unite two creative worlds: master still portraiture and big-screen cinema. Every wedding, commercial, and portrait session is approached with directorial finesse, ensuring your story is immortalized with timeless sophistication."
           />
           <div className="mt-8 grid grid-cols-3 gap-4">
             {[
-              { value: `${shopStats.yearsExperience}+`, label: "Years" },
-              { value: `${formatCompact(shopStats.clients)}+`, label: "Clients" },
-              { value: `${shopStats.rating}★`, label: "Rating" },
+              { value: `${shopStats.yearsExperience}+`, label: "Years Experience" },
+              { value: `${formatCompact(shopStats.clients)}+`, label: "Happy Clients" },
+              { value: `${shopStats.rating}★`, label: "Client Rating" },
             ].map((s) => (
               <div key={s.label} className="rounded-2xl border border-border bg-card p-5 text-center">
                 <p className="heading text-2xl text-gold">{s.value}</p>
@@ -62,7 +62,7 @@ export default function AboutPage() {
       {/* Values */}
       <section className="border-y border-border bg-secondary">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
-          <SectionHeading align="center" eyebrow="What we stand for" title="Our values" className="mb-12" />
+          <SectionHeading align="center" eyebrow="Our Philosophy" title="What Defines Our Work" className="mb-12" />
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v, i) => (
               <Reveal key={v.title} delay={i * 0.08} className="rounded-2xl border border-border bg-card p-6">
@@ -79,7 +79,7 @@ export default function AboutPage() {
 
       {/* Timeline */}
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
-        <SectionHeading align="center" eyebrow="The journey" title="How we got here" className="mb-12" />
+        <SectionHeading align="center" eyebrow="The Journey" title="A Decade of Cinematic Milestones" className="mb-12" />
         <div className="relative space-y-8 border-l border-border pl-8">
           {timeline.map((t, i) => (
             <Reveal key={t.year} delay={i * 0.08} className="relative">

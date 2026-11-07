@@ -1,10 +1,10 @@
 "use client";
 
-import { Scissors } from "lucide-react";
+import { Camera } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-/** Sticky "Book Appointment" bar for mobile — the Instagram→book funnel. */
+/** Sticky "Book a Shoot" bar for mobile. */
 export function MobileBookBar() {
   const pathname = usePathname();
   // Hide on the booking flow itself and inside account pages.
@@ -16,8 +16,8 @@ export function MobileBookBar() {
         href="/book"
         className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-gold text-sm font-semibold text-black shadow-lg shadow-gold/20 active:scale-[0.98]"
       >
-        <Scissors className="size-4" />
-        Book Appointment
+        <Camera className="size-4" />
+        Book a Shoot Session
       </Link>
     </div>
   );

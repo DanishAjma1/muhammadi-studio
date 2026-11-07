@@ -6,21 +6,21 @@ import { CTABand, InstagramIcon, PageHeader, Reveal } from "@/components/common"
 import { gallery, shopSettings } from "@/data";
 
 export const metadata: Metadata = {
-  title: "Instagram",
-  description: "Follow the craft — daily cuts, fades and behind-the-scenes on Instagram.",
+  title: "Instagram Portfolio",
+  description: "Follow the craft — behind-the-scenes cinema rigs, wedding movie trailers, and fine-art portraits on Instagram.",
 };
 
 export default function SocialPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Follow the craft"
+        eyebrow="Follow the Craft"
         title={shopSettings.social.instagram}
-        subtitle="We post fresh cuts daily. Tap follow and never miss a drop — most of our clients find us here first."
+        subtitle="We post 4K film trailers, camera rig breakdowns, and bridal portraits daily. Follow us to explore our latest shoots."
         align="center"
       >
         <Button href="https://instagram.com" leftIcon={<InstagramIcon className="size-5" />} size="lg">
-          Follow on Instagram
+          Follow @muhammadistudio
         </Button>
       </PageHeader>
 
@@ -41,12 +41,12 @@ export default function SocialPage() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   sizes="(max-width:768px) 50vw, 300px"
                 />
-                <span className="absolute inset-0 flex items-center justify-center gap-4 bg-black/50 opacity-0 transition-opacity group-hover:opacity-100">
+                <span className="absolute inset-0 flex items-center justify-center gap-4 bg-black/60 opacity-0 transition-opacity group-hover:opacity-100">
                   <span className="flex items-center gap-1.5 text-sm font-medium text-white">
-                    <Heart className="size-4 fill-white" /> {120 + i * 7}
+                    <Heart className="size-4 fill-white" /> {240 + i * 19}
                   </span>
                   <span className="flex items-center gap-1.5 text-sm font-medium text-white">
-                    <MessageCircle className="size-4" /> {8 + i}
+                    <MessageCircle className="size-4" /> {18 + i * 2}
                   </span>
                 </span>
               </a>

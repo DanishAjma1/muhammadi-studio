@@ -6,16 +6,16 @@ import { faqs } from "@/data";
 
 export const metadata: Metadata = {
   title: "FAQ",
-  description: "Answers to the most common questions about booking, walk-ins and payments.",
+  description: "Answers to common questions about booking photography and cinematography packages with Muhammadi Studio.",
 };
 
 export default function FaqPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Good to know"
-        title="Frequently asked questions"
-        subtitle="Everything you need to know before your visit. Can't find an answer? Just reach out."
+        eyebrow="Muhammadi Studio Guide"
+        title="Frequently Asked Questions"
+        subtitle="Everything you need to know about booking our cinematography &amp; photography packages, cameras, delivery timelines, and destination travel."
         align="center"
       />
 
@@ -28,14 +28,14 @@ export default function FaqPage() {
           <span className="flex size-12 items-center justify-center rounded-xl bg-gold/10 text-gold">
             <MessageCircleQuestion className="size-6" />
           </span>
-          <h2 className="heading text-xl text-foreground">Still have a question?</h2>
-          <p className="max-w-sm text-sm text-muted">
-            Our team is happy to help. Reach out and we&apos;ll get right back to you.
+          <h2 className="heading text-xl text-foreground">Have a Custom Project or Destination Wedding?</h2>
+          <p className="max-w-md text-sm text-muted">
+            Attiq Butt and our production team are happy to discuss custom multi-day schedules, international travel, or brand commercial proposals.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Button href="/contact">Contact us</Button>
+            <Button href="/contact">Send Studio Message</Button>
             <Button href="/book" variant="outline">
-              Book appointment
+              Book a Shoot Session
             </Button>
           </div>
         </Reveal>

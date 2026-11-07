@@ -90,7 +90,7 @@ export function Navbar() {
               <User className="size-5" />
             </Link>
             <Button href="/book" size="sm" className="hidden sm:inline-flex" leftIcon={<CalendarCheck className="size-4" />}>
-              Book Now
+              Book a Shoot
             </Button>
 
             {/* Mobile toggle */}
@@ -160,7 +160,7 @@ export function Navbar() {
 
               <div className="mt-8 space-y-4">
                 <Button href="/book" fullWidth size="lg" leftIcon={<CalendarCheck className="size-5" />}>
-                  Book Appointment
+                  Book a Shoot Session
                 </Button>
                 <div className="flex items-center justify-between text-sm text-muted">
                   <a href={`tel:${shopSettings.phone}`} className="flex items-center gap-2 hover:text-foreground">

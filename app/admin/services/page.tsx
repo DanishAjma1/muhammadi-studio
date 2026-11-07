@@ -19,17 +19,17 @@ import { formatCurrency } from "@/lib/utils";
 import type { Service, ServiceCategory } from "@/types";
 
 const CATEGORIES = [
-  { label: "Haircut", value: "haircut" },
-  { label: "Beard", value: "beard" },
-  { label: "Shave", value: "shave" },
-  { label: "Package", value: "package" },
+  { label: "Cinematography & Films", value: "cinematography" },
+  { label: "Photography & Stills", value: "photography" },
+  { label: "Commercial & Ads", value: "commercial" },
+  { label: "Signature Package", value: "package" },
 ];
 
 const emptyForm = {
   name: "",
-  category: "haircut" as ServiceCategory,
-  price: 25,
-  durationMin: 45,
+  category: "cinematography" as ServiceCategory,
+  price: 650,
+  durationMin: 180,
   description: "",
   popular: false,
   active: true,
@@ -69,11 +69,11 @@ export default function AdminServicesPage() {
     }
     if (editing) {
       updateService(editing.id, { ...form });
-      toast.success("Service updated.");
+      toast.success("Production service updated.");
       setEditing(null);
     } else {
-      addService({ ...form, slug: slugify(form.name), description: form.description || "A great service." });
-      toast.success("Service added.");
+      addService({ ...form, slug: slugify(form.name), description: form.description || "A luxury production service." });
+      toast.success("Production service added.");
       setCreating(false);
     }
   };
@@ -81,15 +81,15 @@ export default function AdminServicesPage() {
   const confirmDelete = () => {
     if (!toDelete) return;
     removeService(toDelete.id);
-    toast.success("Service removed.");
+    toast.success("Production service removed.");
     setToDelete(null);
   };
 
   const columns: Column<Service>[] = [
     {
       key: "name",
-      header: "Service",
-      width: 220,
+      header: "Service / Package",
+      width: 240,
       sortable: true,
       sortValue: (s) => s.name,
       cell: (s) => (
@@ -102,15 +102,15 @@ export default function AdminServicesPage() {
     {
       key: "category",
       header: "Category",
-      width: 120,
+      width: 140,
       sortable: true,
       sortValue: (s) => s.category,
       cell: (s) => <Badge variant="muted" className="capitalize">{s.category}</Badge>,
     },
     {
       key: "price",
-      header: "Price",
-      width: 100,
+      header: "Investment",
+      width: 110,
       align: "right",
       sortable: true,
       sortValue: (s) => s.price,
@@ -119,8 +119,8 @@ export default function AdminServicesPage() {
     },
     {
       key: "duration",
-      header: "Duration",
-      width: 110,
+      header: "Shoot Duration",
+      width: 130,
       align: "right",
       sortable: true,
       sortValue: (s) => s.durationMin,
@@ -163,9 +163,9 @@ export default function AdminServicesPage() {
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted">{services.length} services</p>
+        <p className="text-sm text-muted">{services.length} production services &amp; packages</p>
         <Button leftIcon={<Plus className="size-4" />} onClick={openCreate}>
-          Add service
+          Add Service / Package
         </Button>
       </div>
 
@@ -173,7 +173,7 @@ export default function AdminServicesPage() {
         columns={columns}
         data={services}
         rowKey={(s) => s.id}
-        exportFilename="services"
+        exportFilename="muhammadi-studio-services"
         searchValue={(s) => `${s.name} ${s.category} ${s.description}`}
         pageSize={10}
       />
@@ -181,19 +181,19 @@ export default function AdminServicesPage() {
       <Modal
         open={creating || !!editing}
         onClose={() => { setCreating(false); setEditing(null); }}
-        title={editing ? "Edit service" : "Add service"}
+        title={editing ? "Edit Production Service" : "Add Production Service"}
         footer={
           <>
             <Button variant="ghost" onClick={() => { setCreating(false); setEditing(null); }}>Cancel</Button>
-            <Button onClick={save}>{editing ? "Save changes" : "Add service"}</Button>
+            <Button onClick={save}>{editing ? "Save changes" : "Add Service"}</Button>
           </>
         }
       >
         <div className="space-y-4">
-          <Input label="Name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+          <Input label="Service / Package Name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
           <div className="grid gap-4 sm:grid-cols-3">
             <Select
-              label="Category"
+              label="Production Category"
               options={CATEGORIES}
               value={form.category}
               onChange={(v) => setForm((f) => ({ ...f, category: v as ServiceCategory }))}
@@ -201,10 +201,10 @@ export default function AdminServicesPage() {
             <Input label="Price ($)" type="number" value={form.price} onChange={(e) => setForm((f) => ({ ...f, price: Number(e.target.value) }))} />
             <Input label="Duration (min)" type="number" value={form.durationMin} onChange={(e) => setForm((f) => ({ ...f, durationMin: Number(e.target.value) }))} />
           </div>
-          <TextArea label="Description" value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} />
+          <TextArea label="Description & Inclusions" value={form.description} onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))} />
           <div className="flex flex-col gap-4 rounded-xl border border-border bg-secondary p-4 sm:flex-row sm:justify-between">
-            <Switch label="Popular" description="Highlight on the site" checked={form.popular} onChange={(v) => setForm((f) => ({ ...f, popular: v }))} />
-            <Switch label="Active" description="Available to book" checked={form.active} onChange={(v) => setForm((f) => ({ ...f, active: v }))} />
+            <Switch label="Featured / Popular" description="Highlight on landing page" checked={form.popular} onChange={(v) => setForm((f) => ({ ...f, popular: v }))} />
+            <Switch label="Active" description="Available for client booking" checked={form.active} onChange={(v) => setForm((f) => ({ ...f, active: v }))} />
           </div>
         </div>
       </Modal>
@@ -212,7 +212,7 @@ export default function AdminServicesPage() {
       <Modal
         open={!!toDelete}
         onClose={() => setToDelete(null)}
-        title="Remove service?"
+        title="Remove Production Service?"
         size="sm"
         footer={
           <>
@@ -222,7 +222,7 @@ export default function AdminServicesPage() {
         }
       >
         <p className="text-sm text-muted">
-          Remove <span className="font-medium text-foreground">{toDelete?.name}</span>? This can&apos;t be undone.
+          Remove <span className="font-medium text-foreground">{toDelete?.name}</span>? This action cannot be undone.
         </p>
       </Modal>
     </div>

@@ -38,8 +38,8 @@ export default function AdminLoginPage() {
           <span className="mt-6 flex size-12 items-center justify-center rounded-xl bg-gold/10 text-gold">
             <ShieldCheck className="size-6" />
           </span>
-          <h1 className="heading mt-4 text-2xl text-foreground">Admin sign in</h1>
-          <p className="mt-1 text-sm text-muted">Manage your shop dashboard.</p>
+          <h1 className="heading mt-4 text-2xl text-foreground">Studio Admin Sign In</h1>
+          <p className="mt-1 text-sm text-muted">Manage Muhammadi Studio productions &amp; shoots.</p>
         </div>
 
         <form onSubmit={submit} className="mt-8 space-y-4">

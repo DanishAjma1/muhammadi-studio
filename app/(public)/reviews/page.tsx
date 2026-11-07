@@ -7,14 +7,19 @@ import { googleRating, reviews } from "@/data";
 import { formatCompact } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Reviews",
-  description: "See what our clients say. Rated 4.9/5 across 1,200+ reviews.",
+  title: "Client Reviews & Testimonials",
+  description: "See what our wedding couples, brand executives, and portrait clients say about Muhammadi Studio. Rated 4.9/5 stars.",
 };
 
 export default function ReviewsPage() {
   return (
     <>
-      <PageHeader eyebrow="Reviews" title="What our clients say" align="center">
+      <PageHeader
+        eyebrow="Client Testimonials"
+        title="What Our Couples &amp; Clients Say"
+        subtitle="Unfiltered reviews from real wedding couples, music artists, and corporate directors."
+        align="center"
+      >
         <div className="flex flex-col items-center gap-4">
           <div className="inline-flex items-center gap-3 rounded-2xl border border-border bg-card px-5 py-3">
             <span className="heading text-3xl text-gold">{googleRating.score}</span>
@@ -24,7 +29,7 @@ export default function ReviewsPage() {
                   <Star key={i} className="size-4 text-gold" fill="currentColor" />
                 ))}
               </span>
-              <p className="text-xs text-muted">{formatCompact(googleRating.count)} Google reviews</p>
+              <p className="text-xs text-muted">{formatCompact(googleRating.count)} verified reviews</p>
             </div>
           </div>
           <ReviewForm />

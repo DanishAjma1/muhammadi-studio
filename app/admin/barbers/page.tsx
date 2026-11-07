@@ -18,18 +18,27 @@ import { useBarbers } from "@/hooks";
 import type { Barber } from "@/types";
 
 const SPECIALTIES = [
-  "Classic Cuts", "Skin Fades", "Beard Styling", "Hot Towel Shaves",
-  "Textured Crops", "Line-ups", "Kids Cuts", "Hair Designs", "Grey Blending",
+  "Cinematic Wedding Films",
+  "Director of Photography",
+  "4K Movie Production",
+  "Royal Bridal Portraits",
+  "Drone Cinematography",
+  "Commercial Ad Campaigns",
+  "Music Video Production",
+  "Fashion & Editorial Shoots",
+  "DaVinci Resolve Colorist",
+  "Studio Strobe Lighting",
+  "Steadicam & Gimbal Rigging",
 ].map((s) => ({ label: s, value: s }));
 
 const emptyForm = {
   name: "",
-  title: "Barber",
+  title: "Director of Cinematography",
   bio: "",
   experienceYears: 1,
   specialties: [] as string[],
   workingDays: "Mon – Fri",
-  workingHours: "10:00 AM – 8:00 PM",
+  workingHours: "09:00 AM – 8:00 PM",
   instagram: "",
   status: "active" as Barber["status"],
 };
@@ -70,27 +79,27 @@ export default function AdminBarbersPage() {
     }
     if (editing) {
       updateBarber(editing.id, { ...form });
-      toast.success("Barber updated.");
+      toast.success("Team member updated.");
       setEditing(null);
     } else {
       addBarber({
         slug: slugify(form.name),
         name: form.name,
         title: form.title,
-        bio: form.bio || "A talented member of our team.",
+        bio: form.bio || "A talented director & visual artist at Muhammadi Studio.",
         experienceYears: form.experienceYears,
         rating: 5,
         reviewsCount: 0,
         specialties: form.specialties,
-        avatar: "https://i.pravatar.cc/400?img=8",
-        cover: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+        cover: "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1200&q=80",
         gallery: [],
         workingDays: form.workingDays,
         workingHours: form.workingHours,
         instagram: form.instagram || undefined,
         status: form.status,
       });
-      toast.success("Barber added.");
+      toast.success("Team member added.");
       setCreating(false);
     }
   };
@@ -104,7 +113,7 @@ export default function AdminBarbersPage() {
   const confirmDelete = () => {
     if (!toDelete) return;
     removeBarber(toDelete.id);
-    toast.success("Barber removed.");
+    toast.success("Team member removed.");
     setToDelete(null);
   };
 
@@ -113,9 +122,9 @@ export default function AdminBarbersPage() {
   return (
     <div className="space-y-5">
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted">{barbers.length} barbers</p>
+        <p className="text-sm text-muted">{barbers.length} directors &amp; master artists</p>
         <Button leftIcon={<Plus className="size-4" />} onClick={openCreate}>
-          Add barber
+          Add Director / Artist
         </Button>
       </div>
 
@@ -137,7 +146,7 @@ export default function AdminBarbersPage() {
                 <div className="mt-1 flex items-center gap-1.5">
                   <StarRating rating={b.rating} size={13} />
                   <span className="text-xs text-muted">
-                    <Star className="mr-0.5 inline size-3" /> {b.experienceYears} yrs
+                    <Star className="mr-0.5 inline size-3" /> {b.experienceYears} yrs exp
                   </span>
                 </div>
               </div>
@@ -164,21 +173,21 @@ export default function AdminBarbersPage() {
           setCreating(false);
           setEditing(null);
         }}
-        title={editing ? "Edit barber" : "Add barber"}
+        title={editing ? "Edit Director / Artist" : "Add Director / Artist"}
         size="lg"
         footer={
           <>
             <Button variant="ghost" onClick={() => { setCreating(false); setEditing(null); }}>
               Cancel
             </Button>
-            <Button onClick={save}>{editing ? "Save changes" : "Add barber"}</Button>
+            <Button onClick={save}>{editing ? "Save changes" : "Add to Team"}</Button>
           </>
         }
       >
         <div className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input label="Name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
-            <Input label="Title" value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} />
+            <Input label="Full Name" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+            <Input label="Title / Role" placeholder="e.g. Director of Cinematography" value={form.title} onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))} />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             <Input
@@ -198,17 +207,17 @@ export default function AdminBarbersPage() {
             />
           </div>
           <MultiSelect
-            label="Specialties"
+            label="Production Specialties"
             options={SPECIALTIES}
             value={form.specialties}
             onChange={(v) => setForm((f) => ({ ...f, specialties: v }))}
           />
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input label="Working days" value={form.workingDays} onChange={(e) => setForm((f) => ({ ...f, workingDays: e.target.value }))} />
-            <Input label="Working hours" value={form.workingHours} onChange={(e) => setForm((f) => ({ ...f, workingHours: e.target.value }))} />
+            <Input label="Available Days" value={form.workingDays} onChange={(e) => setForm((f) => ({ ...f, workingDays: e.target.value }))} />
+            <Input label="Working Hours" value={form.workingHours} onChange={(e) => setForm((f) => ({ ...f, workingHours: e.target.value }))} />
           </div>
-          <Input label="Instagram" placeholder="@handle" value={form.instagram} onChange={(e) => setForm((f) => ({ ...f, instagram: e.target.value }))} />
-          <TextArea label="Bio" value={form.bio} onChange={(e) => setForm((f) => ({ ...f, bio: e.target.value }))} />
+          <Input label="Instagram Handle" placeholder="@handle" value={form.instagram} onChange={(e) => setForm((f) => ({ ...f, instagram: e.target.value }))} />
+          <TextArea label="Artistic Bio" value={form.bio} onChange={(e) => setForm((f) => ({ ...f, bio: e.target.value }))} />
         </div>
       </Modal>
 
@@ -216,7 +225,7 @@ export default function AdminBarbersPage() {
       <Modal
         open={!!toDelete}
         onClose={() => setToDelete(null)}
-        title="Remove barber?"
+        title="Remove Director / Artist?"
         size="sm"
         footer={
           <>
@@ -226,7 +235,7 @@ export default function AdminBarbersPage() {
         }
       >
         <p className="text-sm text-muted">
-          Remove <span className="font-medium text-foreground">{toDelete?.name}</span> from the team? This can&apos;t be undone.
+          Remove <span className="font-medium text-foreground">{toDelete?.name}</span> from the production team? This action cannot be undone.
         </p>
       </Modal>
     </div>

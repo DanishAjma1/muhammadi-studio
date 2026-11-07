@@ -1,8 +1,8 @@
 // ============================================================
-// Domain types for the Barber & Co. mockup
+// Domain types for Muhammadi Studio (Photography & Movie Production)
 // ============================================================
 
-export type ServiceCategory = "haircut" | "beard" | "shave" | "package";
+export type ServiceCategory = "photography" | "cinematography" | "commercial" | "package";
 
 export interface Service {
   id: string;
@@ -100,7 +100,7 @@ export interface Review {
   source: ReviewSource;
 }
 
-export type GalleryCategory = "fade" | "classic" | "beard" | "styling";
+export type GalleryCategory = "weddings" | "films" | "portraits" | "commercial";
 
 export interface GalleryItem {
   id: string;
@@ -155,6 +155,8 @@ export interface OpeningHour {
 export interface ShopSettings {
   name: string;
   tagline: string;
+  coFounder: string;
+  founder: string;
   address: string;
   phone: string;
   email: string;
@@ -171,10 +173,19 @@ export interface ShopSettings {
     sms: boolean;
     whatsapp: boolean;
   };
+  smtp?: {
+    service: string;
+    host: string;
+    port: number;
+    secure: boolean;
+    user: string;
+    notificationEmail: string;
+  };
   social: {
     instagram: string;
     tiktok: string;
     facebook: string;
+    youtube?: string;
   };
 }
 

@@ -9,7 +9,7 @@ export function InstagramStrip() {
     <section className="overflow-hidden border-y border-border bg-secondary py-14">
       <div className="mx-auto mb-8 flex max-w-7xl flex-col items-center gap-4 px-4 text-center sm:flex-row sm:justify-between sm:text-left sm:px-6">
         <div>
-          <p className="eyebrow mb-2">Follow the craft</p>
+          <p className="eyebrow mb-2">Behind the Lens</p>
           <h2 className="heading text-2xl text-foreground sm:text-3xl">
             {shopSettings.social.instagram}
           </h2>
@@ -19,7 +19,7 @@ export function InstagramStrip() {
           variant="outline"
           leftIcon={<InstagramIcon className="size-4" />}
         >
-          Follow Us
+          Follow Our Journey
         </Button>
       </div>
 
@@ -30,8 +30,8 @@ export function InstagramStrip() {
               key={i}
               className="relative size-40 shrink-0 overflow-hidden rounded-xl border border-border sm:size-48"
             >
-              <Image src={src} alt="Instagram post" fill className="object-cover" sizes="192px" />
-              <span className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all hover:bg-black/40 hover:opacity-100">
+              <Image src={src} alt="Muhammadi Studio Cinema Frame" fill className="object-cover" sizes="192px" />
+              <span className="absolute inset-0 flex items-center justify-center bg-black/0 opacity-0 transition-all hover:bg-black/50 hover:opacity-100">
                 <InstagramIcon className="size-6 text-white" />
               </span>
             </div>

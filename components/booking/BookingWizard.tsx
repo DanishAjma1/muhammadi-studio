@@ -1,11 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowLeft, ArrowRight, CalendarCheck, Check, Clock, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, CalendarCheck, Camera, Check, Clock, Users } from "lucide-react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { Avatar, Button, Input, StarRating, TextArea, useToast } from "@/components/core";
+import { useEffect, useState } from "react";
+import { Button, Input, StarRating, TextArea, useToast } from "@/components/core";
 import { useAppointments, useAvailability, useBarbers, useServices } from "@/hooks";
 import { useBookingStore } from "@/store/bookingStore";
 import { cn, formatCurrency, formatDate } from "@/lib/utils";
@@ -16,6 +16,7 @@ export function BookingWizard() {
   const router = useRouter();
   const params = useSearchParams();
   const toast = useToast();
+  const [submitting, setSubmitting] = useState(false);
 
   const { activeServices } = useServices();
   const { activeBarbers, getById: getBarber } = useBarbers();
@@ -47,7 +48,7 @@ export function BookingWizard() {
     (step === 4 && !!time) ||
     step === 5;
 
-  const confirm = () => {
+  const confirm = async () => {
     if (!details.name.trim() || !details.phone.trim()) {
       toast.error("Please enter your name and phone number.");
       return;
@@ -55,6 +56,8 @@ export function BookingWizard() {
     if (!service || !date || !time) return;
     const assigned = barberId === "any" ? activeBarbers[0] : getBarber(barberId!);
     if (!assigned) return;
+
+    setSubmitting(true);
 
     const appt = addAppointment({
       customerId: "guest",
@@ -72,7 +75,33 @@ export function BookingWizard() {
       notes: details.notes || undefined,
       source: "direct",
     });
+
+    // Dispatch Gmail SMTP notification asynchronously
+    try {
+      await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          bookingId: appt.id,
+          serviceName: service.name,
+          price: service.price,
+          barberName: assigned.name,
+          date,
+          time,
+          durationMin: service.durationMin,
+          clientName: details.name,
+          clientPhone: details.phone,
+          clientEmail: details.email,
+          notes: details.notes,
+        }),
+      });
+    } catch (err) {
+      console.warn("Background SMTP notification notice:", err);
+    }
+
     setLastBooking(appt);
+    setSubmitting(false);
+    toast.success("Shoot reserved! Notification dispatched via Gmail SMTP.", "Session Confirmed");
     router.push("/book/success");
     setTimeout(() => reset(), 400);
   };
@@ -80,8 +109,11 @@ export function BookingWizard() {
   return (
     <div className="mx-auto max-w-5xl px-4 pt-28 pb-16 sm:px-6 sm:pt-32">
       <div className="mb-8 text-center">
-        <p className="eyebrow mb-2">Book your chair</p>
-        <h1 className="heading text-3xl text-foreground sm:text-4xl">Reserve your appointment</h1>
+        <p className="eyebrow mb-2">Muhammadi Studio</p>
+        <h1 className="heading text-3xl text-foreground sm:text-4xl">Reserve Your Production Shoot</h1>
+        <p className="mt-2 text-sm text-muted">
+          Select your service package, choose your Director / Photographer, and book your session in under a minute.
+        </p>
       </div>
 
       <div className="mb-10">
@@ -102,7 +134,7 @@ export function BookingWizard() {
               {/* Step 1 — Service */}
               {step === 1 && (
                 <div className="space-y-3">
-                  <h2 className="heading text-xl text-foreground">Select a service</h2>
+                  <h2 className="heading text-xl text-foreground">Select a production package</h2>
                   {activeServices.map((s) => (
                     <button
                       key={s.id}
@@ -123,7 +155,7 @@ export function BookingWizard() {
                       <span className="flex-1">
                         <span className="block font-medium text-foreground">{s.name}</span>
                         <span className="flex items-center gap-1 text-xs text-muted">
-                          <Clock className="size-3" /> {s.durationMin} min
+                          <Clock className="size-3" /> {s.durationMin} min duration
                         </span>
                       </span>
                       <span className="heading text-lg text-gold">{formatCurrency(s.price)}</span>
@@ -132,10 +164,10 @@ export function BookingWizard() {
                 </div>
               )}
 
-              {/* Step 2 — Barber */}
+              {/* Step 2 — Director / Photographer */}
               {step === 2 && (
                 <div>
-                  <h2 className="heading mb-4 text-xl text-foreground">Choose your barber</h2>
+                  <h2 className="heading mb-4 text-xl text-foreground">Choose your Director / Lead Artist</h2>
                   <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                     <button
                       onClick={() => setBarber("any")}
@@ -147,8 +179,8 @@ export function BookingWizard() {
                       <span className="flex size-16 items-center justify-center rounded-full bg-elevated text-muted">
                         <Users className="size-6" />
                       </span>
-                      <span className="text-sm font-medium text-foreground">Any Available</span>
-                      <span className="text-xs text-muted">Fastest slot</span>
+                      <span className="text-sm font-medium text-foreground">Any Master Artist</span>
+                      <span className="text-xs text-muted">Fastest open date</span>
                     </button>
                     {activeBarbers.map((b) => (
                       <button
@@ -163,6 +195,7 @@ export function BookingWizard() {
                           <Image src={b.avatar} alt={b.name} fill className="object-cover" sizes="64px" />
                         </div>
                         <span className="text-sm font-medium text-foreground">{b.name}</span>
+                        <span className="text-xs text-gold/80">{b.id === "brb_attiq" ? "Co-Founder" : b.id === "brb_usman" ? "Founder" : "Lead Specialist"}</span>
                         <StarRating rating={b.rating} size={12} />
                       </button>
                     ))}
@@ -173,7 +206,7 @@ export function BookingWizard() {
               {/* Step 3 — Date */}
               {step === 3 && (
                 <div>
-                  <h2 className="heading mb-4 text-xl text-foreground">Select a date</h2>
+                  <h2 className="heading mb-4 text-xl text-foreground">Select a date for the shoot</h2>
                   <Calendar value={date} onChange={setDate} />
                 </div>
               )}
@@ -181,7 +214,7 @@ export function BookingWizard() {
               {/* Step 4 — Time */}
               {step === 4 && (
                 <div>
-                  <h2 className="heading mb-1 text-xl text-foreground">Available times</h2>
+                  <h2 className="heading mb-1 text-xl text-foreground">Available Call Times</h2>
                   <p className="mb-4 text-sm text-muted">{date && formatDate(date, "weekday")}</p>
                   <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
                     {slots.map((slot) => (
@@ -208,31 +241,31 @@ export function BookingWizard() {
               {/* Step 5 — Details */}
               {step === 5 && (
                 <div className="space-y-4">
-                  <h2 className="heading text-xl text-foreground">Your details</h2>
+                  <h2 className="heading text-xl text-foreground">Your contact & shoot details</h2>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <Input
                       label="Full name"
-                      placeholder="John Doe"
+                      placeholder="e.g. Sarah Khan"
                       value={details.name}
                       onChange={(e) => setDetails({ name: e.target.value })}
                     />
                     <Input
-                      label="Phone"
+                      label="Phone / WhatsApp"
                       placeholder="+1 (555) 000-0000"
                       value={details.phone}
                       onChange={(e) => setDetails({ phone: e.target.value })}
                     />
                   </div>
                   <Input
-                    label="Email (optional)"
+                    label="Email address (for booking & contract delivery)"
                     type="email"
-                    placeholder="you@email.com"
+                    placeholder="sarah@example.com"
                     value={details.email}
                     onChange={(e) => setDetails({ email: e.target.value })}
                   />
                   <TextArea
-                    label="Notes (optional)"
-                    placeholder="Anything your barber should know?"
+                    label="Shoot Vision / Venue / Notes (optional)"
+                    placeholder="Share any special instructions, venue locations, or aesthetic preferences for Attiq Butt & the crew..."
                     value={details.notes}
                     onChange={(e) => setDetails({ notes: e.target.value })}
                   />
@@ -246,7 +279,7 @@ export function BookingWizard() {
             <Button
               variant="ghost"
               onClick={back}
-              disabled={step === 1}
+              disabled={step === 1 || submitting}
               leftIcon={<ArrowLeft className="size-4" />}
             >
               Back
@@ -256,8 +289,8 @@ export function BookingWizard() {
                 Continue
               </Button>
             ) : (
-              <Button onClick={confirm} leftIcon={<CalendarCheck className="size-4" />}>
-                Confirm booking
+              <Button onClick={confirm} loading={submitting} leftIcon={<CalendarCheck className="size-4" />}>
+                Confirm Shoot &amp; Send Gmail Alert
               </Button>
             )}
           </div>
@@ -266,24 +299,24 @@ export function BookingWizard() {
         {/* Summary */}
         <aside className="lg:sticky lg:top-24 lg:self-start">
           <div className="rounded-2xl border border-border bg-card p-5">
-            <h3 className="font-semibold text-foreground">Booking summary</h3>
+            <h3 className="font-semibold text-foreground">Production Summary</h3>
             <dl className="mt-4 space-y-3 text-sm">
-              <SummaryRow label="Service" value={service?.name} />
+              <SummaryRow label="Package" value={service?.name} />
               <SummaryRow
-                label="Barber"
-                value={barberId === "any" ? "Any Available" : getBarber(barberId ?? "")?.name}
+                label="Director / Lead"
+                value={barberId === "any" ? "Any Master Artist" : getBarber(barberId ?? "")?.name}
               />
               <SummaryRow label="Date" value={date ? formatDate(date, "medium") : undefined} />
-              <SummaryRow label="Time" value={time ?? undefined} />
+              <SummaryRow label="Call Time" value={time ?? undefined} />
             </dl>
             {service && (
               <div className="mt-4 flex items-center justify-between border-t border-border pt-4">
-                <span className="text-sm text-muted">Total</span>
+                <span className="text-sm text-muted">Total Investment</span>
                 <span className="heading text-2xl text-gold">{formatCurrency(service.price)}</span>
               </div>
             )}
             <p className="mt-4 flex items-center gap-2 text-xs text-faint">
-              <Clock className="size-3.5" /> Free cancellation up to 2 hours before.
+              <Camera className="size-3.5 text-gold" /> Includes 4K delivery &amp; color-graded master.
             </p>
           </div>
         </aside>

@@ -4,8 +4,8 @@ import { BlogCard } from "@/components/blog/BlogCard";
 import { blogPosts } from "@/data";
 
 export const metadata: Metadata = {
-  title: "Style Guide",
-  description: "Grooming tips, style trends and care guides from our barbers.",
+  title: "Cinema Insights & Filmmaking Journal",
+  description: "Filmmaking techniques, wedding photography guides, camera lighting breakdowns, and director journals from Attiq Butt & the Muhammadi Studio team.",
 };
 
 export default function BlogPage() {
@@ -13,9 +13,9 @@ export default function BlogPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Style guide"
-        title="Tips from the chair"
-        subtitle="Grooming advice, trend breakdowns and care guides — straight from our barbers."
+        eyebrow="Behind the Lens"
+        title="Cinema &amp; Photography Insights"
+        subtitle="Filmmaking philosophies, wedding cinema breakdowns, studio lighting masterclasses, and post-production secrets from Attiq Butt &amp; our crew."
       />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
