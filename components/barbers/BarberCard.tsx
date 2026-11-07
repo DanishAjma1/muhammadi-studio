@@ -13,7 +13,7 @@ export function BarberCard({ barber, className }: { barber: Barber; className?: 
         className,
       )}
     >
-      <Link href={`/barbers/${barber.slug}`} className="relative block aspect-[4/5] overflow-hidden">
+      <Link href={`/cinematographers/${barber.slug}`} className="relative block aspect-[4/5] overflow-hidden">
         <Image
           src={barber.cover}
           alt={barber.name}
@@ -39,7 +39,7 @@ export function BarberCard({ barber, className }: { barber: Barber; className?: 
         </div>
       </Link>
       <div className="grid grid-cols-2 gap-2 p-4">
-        <Button href={`/barbers/${barber.slug}`} variant="secondary" size="sm">
+        <Button href={`/cinematographers/${barber.slug}`} variant="secondary" size="sm">
           View Profile
         </Button>
         <Button href={`/book?barber=${barber.id}`} size="sm">

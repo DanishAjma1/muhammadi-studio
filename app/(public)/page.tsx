@@ -78,7 +78,7 @@ export default function LandingPage() {
               <Button href="/about" variant="secondary" rightIcon={<ArrowRight className="size-4" />}>
                 Read Our Story
               </Button>
-              <Button href="/barbers" variant="ghost" rightIcon={<Film className="size-4" />}>
+              <Button href="/cinematographers" variant="ghost" rightIcon={<Film className="size-4" />}>
                 Meet Attiq Butt &amp; Team
               </Button>
             </div>
@@ -94,7 +94,7 @@ export default function LandingPage() {
             title="Meet Our Cinematographers &amp; Artists"
             subtitle="Led by Co-Founder Attiq Butt, our crew of filmmakers, aerial drone pilots, and master photographers bring cinematic mastery to every shoot."
           />
-          <Button href="/barbers" variant="ghost" rightIcon={<ArrowRight className="size-4" />}>
+          <Button href="/cinematographers" variant="ghost" rightIcon={<ArrowRight className="size-4" />}>
             All team members
           </Button>
         </div>

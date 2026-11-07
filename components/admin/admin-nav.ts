@@ -16,7 +16,7 @@ export const adminNav = [
   { href: "/admin/appointments", label: "Shoot Bookings", icon: CalendarDays },
   { href: "/admin/calendar", label: "Studio Calendar", icon: CalendarRange },
   { href: "/admin/customers", label: "Clients", icon: Users },
-  { href: "/admin/barbers", label: "Artists & Crew", icon: Clapperboard },
+  { href: "/admin/cinematographers", label: "Artists & Crew", icon: Clapperboard },
   { href: "/admin/services", label: "Services & Packages", icon: ListChecks },
   { href: "/admin/revenue", label: "Revenue", icon: DollarSign },
   { href: "/admin/analytics", label: "Analytics", icon: BarChart3 },

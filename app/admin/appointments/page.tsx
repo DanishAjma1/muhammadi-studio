@@ -146,7 +146,7 @@ export default function AdminAppointmentsPage() {
             </div>
             <dl className="grid grid-cols-2 gap-4 rounded-xl border border-border bg-secondary p-4 text-sm">
               <Field label="Service" value={selected.serviceName} />
-              <Field label="Barber" value={selected.barberName} />
+              <Field label="Director / Cinematographer" value={selected.barberName} />
               <Field label="Date" value={formatDate(selected.date, "medium")} />
               <Field label="Time" value={selected.time} />
               <Field label="Duration" value={`${selected.durationMin} min`} />

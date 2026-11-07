@@ -6,7 +6,7 @@ export interface NavLink {
 // Primary links shown in the desktop navbar
 export const primaryLinks: NavLink[] = [
   { href: "/services", label: "Services" },
-  { href: "/barbers", label: "Cinematographers" },
+  { href: "/cinematographers", label: "Cinematographers" },
   { href: "/gallery", label: "Portfolio" },
   { href: "/reviews", label: "Reviews" },
   { href: "/about", label: "About" },
@@ -27,7 +27,7 @@ export const footerColumns: { title: string; links: NavLink[] }[] = [
     title: "Production",
     links: [
       { href: "/services", label: "Films & Photography" },
-      { href: "/barbers", label: "Directors & Artists" },
+      { href: "/cinematographers", label: "Directors & Artists" },
       { href: "/gallery", label: "Visual Portfolio" },
       { href: "/book", label: "Book a Shoot" },
     ],
