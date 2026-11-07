@@ -19,16 +19,17 @@ import { formatCurrency } from "@/lib/utils";
 import type { Service, ServiceCategory } from "@/types";
 
 const CATEGORIES = [
-  { label: "Cinematography & Films", value: "cinematography" },
-  { label: "Photography & Stills", value: "photography" },
-  { label: "Commercial & Ads", value: "commercial" },
-  { label: "Signature Package", value: "package" },
+  { label: "Core Specialized Setup", value: "setup" },
+  { label: "Event Occasion / Function", value: "function" },
+  { label: "Photography", value: "photography" },
+  { label: "Cinematography", value: "cinematography" },
+  { label: "Complete Package", value: "package" },
 ];
 
 const emptyForm = {
   name: "",
-  category: "cinematography" as ServiceCategory,
-  price: 650,
+  category: "setup" as ServiceCategory,
+  price: 0,
   durationMin: 180,
   description: "",
   popular: false,
@@ -72,7 +73,12 @@ export default function AdminServicesPage() {
       toast.success("Production service updated.");
       setEditing(null);
     } else {
-      addService({ ...form, slug: slugify(form.name), description: form.description || "A luxury production service." });
+      addService({
+        ...form,
+        slug: slugify(form.name),
+        description: form.description || "A specialized event setup / function.",
+        image: "/images/setup-decor.jpg",
+      });
       toast.success("Production service added.");
       setCreating(false);
     }

@@ -424,6 +424,168 @@ export async function sendBookingNotification({
 }
 
 /**
+ * Send Official Approval & Confirmation Email to Client
+ * Triggered when Admin (Atiq Butt) approves a pending event booking.
+ */
+export async function sendBookingApprovalConfirmation({
+  bookingId,
+  clientName,
+  clientEmail,
+  clientPhone,
+  functions,
+  date,
+  time,
+  venue,
+  adminNotes,
+}: {
+  bookingId: string;
+  clientName: string;
+  clientEmail: string;
+  clientPhone: string;
+  functions: string[];
+  date: string;
+  time: string;
+  venue?: string;
+  adminNotes?: string;
+}): Promise<SendMailResult> {
+  const config = getMailConfig();
+
+  if (!config.isConfigured) {
+    console.log("============================================================");
+    console.log("🎉 [GMAIL SMTP CLIENT APPROVAL CONFIRMATION — SIMULATED MODE]");
+    console.log(`Booking ID: #${bookingId}`);
+    console.log(`Client: ${clientName} (${clientPhone}) <${clientEmail}>`);
+    console.log(`Functions: ${functions.join(", ")}`);
+    console.log(`Date & Time: ${date} at ${time}`);
+    console.log(`Venue: ${venue || "Main Bazar, New Plaza, Shop No: 2"}`);
+    console.log("Studio Address: Main Bazar, New Plaza, Shop No: 2, Pakistan");
+    console.log("Contact / WhatsApp: 0313-7526305 (Atiq Butt)");
+    if (adminNotes) console.log(`Admin Notes: ${adminNotes}`);
+    console.log("============================================================");
+
+    return {
+      success: true,
+      simulated: true,
+      message: `Approval confirmed for ${clientName}! (Simulated email logged for ${clientEmail}).`,
+    };
+  }
+
+  try {
+    const transporter = createGmailTransporter()!;
+
+    const functionListHtml = functions
+      .map(
+        (f) =>
+          `<span style="display: inline-block; background: rgba(201, 162, 39, 0.15); border: 1px solid rgba(201, 162, 39, 0.4); color: #C9A227; font-size: 13px; font-weight: 600; padding: 4px 10px; border-radius: 9999px; margin: 3px 4px 3px 0;">✓ ${f}</span>`
+      )
+      .join(" ");
+
+    const clientHtml = brandHtmlWrapper(
+      `Event Booking Approved: ${clientName}`,
+      `
+      <div style="text-align: center; margin-bottom: 24px;">
+        <span class="badge" style="background: rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.5); color: #22C55E; font-size: 13px; padding: 6px 14px;">
+          ✓ Officially Approved & Confirmed
+        </span>
+        <h2 class="heading" style="margin: 14px 0 6px 0; font-size: 26px;">Your Event is Officially Confirmed! 🎬🎉</h2>
+        <p style="color: #C9A227; font-size: 14px; font-weight: 600; margin: 0; letter-spacing: 0.5px;">
+          "Dream It... We Plan It... You Enjoy It!"
+        </p>
+      </div>
+
+      <p style="color: #E4E4E7; font-size: 15px; line-height: 1.6;">
+        Dear <strong>${clientName}</strong>,
+      </p>
+      <p style="color: #A1A1AA; font-size: 14px; line-height: 1.6;">
+        We are thrilled to inform you that your event booking has been personally reviewed and <strong>APPROVED</strong> by <strong>Atiq Butt</strong> (Owner & Lead Event Director). All requested setups, cinematography crew, and decorations are officially locked for your date.
+      </p>
+
+      <table class="field-table" style="margin: 20px 0;">
+        <tr>
+          <td class="field-label">Booking Reference</td>
+          <td class="field-value" style="color: #C9A227; font-weight: 700;">#${bookingId}</td>
+        </tr>
+        <tr>
+          <td class="field-label">Confirmed Function(s)</td>
+          <td class="field-value">${functionListHtml}</td>
+        </tr>
+        <tr>
+          <td class="field-label">Scheduled Date</td>
+          <td class="field-value" style="color: #FFFFFF; font-weight: 600;">${date}</td>
+        </tr>
+        <tr>
+          <td class="field-label">Call Time</td>
+          <td class="field-value">${time}</td>
+        </tr>
+        <tr>
+          <td class="field-label">Venue / Event Location</td>
+          <td class="field-value">${venue || "Client Designated Venue"}</td>
+        </tr>
+        <tr>
+          <td class="field-label">Client Name</td>
+          <td class="field-value">${clientName}</td>
+        </tr>
+        <tr>
+          <td class="field-label">Client Phone</td>
+          <td class="field-value"><a href="tel:${clientPhone}" style="color: #C9A227;">${clientPhone}</a></td>
+        </tr>
+      </table>
+
+      ${
+        adminNotes
+          ? `
+          <div style="background: rgba(201, 162, 39, 0.08); border-left: 3px solid #C9A227; padding: 12px 16px; margin: 20px 0; border-radius: 4px;">
+            <p style="margin: 0; font-size: 13px; color: #C9A227; font-weight: 600; text-transform: uppercase;">Message from Atiq Butt:</p>
+            <p style="margin: 6px 0 0 0; font-size: 14px; color: #E4E4E7; line-height: 1.5;">${adminNotes.replace(/\n/g, "<br>")}</p>
+          </div>
+          `
+          : ""
+      }
+
+      <div style="border-top: 1px solid #272727; padding-top: 20px; margin-top: 24px;">
+        <h4 style="color: #FFFFFF; font-size: 14px; margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 1px;">Studio Office & Contact Details:</h4>
+        <p style="color: #A1A1AA; font-size: 13px; line-height: 1.6; margin: 4px 0;">
+          📍 <strong>Studio Location:</strong> Main Bazar, New Plaza, Shop No: 2, Pakistan<br>
+          📞 <strong>Call & WhatsApp:</strong> <a href="tel:03137526305" style="color: #C9A227; font-weight: 600;">0313-7526305</a><br>
+          👤 <strong>Event Director:</strong> Atiq Butt (Owner)<br>
+          🌐 <strong>Website:</strong> <a href="https://muhammadi-studio.vercel.app" style="color: #C9A227;">muhammadi-studio.vercel.app</a>
+        </p>
+      </div>
+
+      <div style="background: #181818; border: 1px solid #272727; border-radius: 8px; padding: 14px; margin-top: 20px; text-align: center;">
+        <p style="color: #C9A227; font-size: 14px; font-weight: 600; margin: 0;">
+          "Your Event, Our Responsibility, Memories Forever! ❤️"
+        </p>
+      </div>
+      `
+    );
+
+    const info = await transporter.sendMail({
+      from: `"${config.fromName}" <${config.user}>`,
+      to: clientEmail,
+      subject: `🎉 Booking Officially Confirmed — Muhammadi Studio & Event Management (#${bookingId})`,
+      html: clientHtml,
+    });
+
+    return {
+      success: true,
+      simulated: false,
+      messageId: info.messageId,
+      message: `Official confirmation email sent to ${clientEmail}!`,
+    };
+  } catch (error: unknown) {
+    const errorMsg = error instanceof Error ? error.message : "Failed to send approval email";
+    console.error("❌ Approval Email Error:", error);
+    return {
+      success: false,
+      simulated: false,
+      error: errorMsg,
+      message: "Failed to dispatch approval confirmation email.",
+    };
+  }
+}
+
+/**
  * Verify SMTP connection status
  */
 export async function testSmtpConnection() {

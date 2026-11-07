@@ -1,8 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { CalendarCheck, Menu, Phone, User, X } from "lucide-react";
-import { InstagramIcon } from "@/components/common/Icons";
+import { CalendarCheck, Menu, Phone, Sparkles, User, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -19,36 +18,21 @@ function useActive() {
 }
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const isActive = useActive();
   const pathname = usePathname();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // close mobile menu on route change
   useEffect(() => setMenuOpen(false), [pathname]);
 
   return (
     <>
-      <header
-        className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
-          scrolled
-            ? "border-b border-border bg-background/80 backdrop-blur-xl"
-            : "border-b border-transparent bg-gradient-to-b from-black/40 to-transparent",
-        )}
-      >
-        <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:h-20">
+      <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/95 backdrop-blur-xl shadow-lg transition-all duration-200">
+        <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6 lg:h-20">
           <Logo />
 
-          {/* Desktop floating pill nav */}
-          <div className="hidden items-center rounded-full border border-border/70 bg-secondary/60 p-1 backdrop-blur lg:flex">
+          {/* Desktop floating pill nav - ALWAYS VISIBLE ON DESKTOP */}
+          <div className="hidden items-center rounded-full border border-border/80 bg-secondary/80 p-1 backdrop-blur lg:flex shadow-inner">
             {primaryLinks.map((link) => {
               const active = isActive(link.href);
               return (
@@ -57,13 +41,13 @@ export function Navbar() {
                   href={link.href}
                   className={cn(
                     "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
-                    active ? "text-black" : "text-muted hover:text-foreground",
+                    active ? "text-black font-semibold" : "text-muted hover:text-foreground",
                   )}
                 >
                   {active && (
                     <motion.span
                       layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full bg-gold"
+                      className="absolute inset-0 rounded-full bg-gold shadow-sm"
                       transition={{ type: "spring", stiffness: 380, damping: 32 }}
                     />
                   )}
@@ -76,28 +60,31 @@ export function Navbar() {
           {/* Right cluster */}
           <div className="flex items-center gap-2">
             <a
-              href={`tel:${shopSettings.phone}`}
-              className="hidden items-center gap-2 rounded-full px-3 py-2 text-sm text-muted transition-colors hover:text-foreground xl:flex"
+              href="tel:03137526305"
+              className="hidden items-center gap-2 rounded-full border border-border bg-card px-3.5 py-2 text-xs font-semibold text-foreground transition-all hover:border-gold hover:text-gold sm:flex"
             >
-              <Phone className="size-4" />
-              <span className="tabular-nums">{shopSettings.phone}</span>
+              <Phone className="size-3.5 text-gold" />
+              <span className="tabular-nums">0313-7526305</span>
             </a>
+
             <Link
-              href="/account"
-              aria-label="My account"
-              className="hidden size-10 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-gold/50 hover:text-foreground sm:flex"
+              href="/admin/appointments"
+              aria-label="Studio Admin"
+              className="hidden size-9 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-gold/50 hover:text-gold md:flex"
+              title="Studio Portal"
             >
-              <User className="size-5" />
+              <User className="size-4" />
             </Link>
+
             <Button href="/book" size="sm" className="hidden sm:inline-flex" leftIcon={<CalendarCheck className="size-4" />}>
-              Book a Shoot
+              Book an Event
             </Button>
 
             {/* Mobile toggle */}
             <button
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
-              className="flex size-10 items-center justify-center rounded-full border border-border text-foreground lg:hidden"
+              className="flex size-10 items-center justify-center rounded-xl border border-border bg-card text-foreground hover:border-gold lg:hidden transition-colors"
             >
               <Menu className="size-5" />
             </button>
@@ -109,35 +96,40 @@ export function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] flex flex-col bg-background/98 backdrop-blur-xl lg:hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="fixed inset-0 z-[60] flex flex-col bg-background/98 backdrop-blur-2xl lg:hidden"
           >
-            <div className="flex h-18 items-center justify-between px-4 sm:px-6">
+            <div className="flex h-18 items-center justify-between border-b border-border px-4 sm:px-6">
               <Logo />
               <button
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu"
-                className="flex size-10 items-center justify-center rounded-full border border-border text-foreground"
+                className="flex size-10 items-center justify-center rounded-xl border border-border bg-card text-foreground"
               >
                 <X className="size-5" />
               </button>
             </div>
 
-            <div className="flex flex-1 flex-col justify-between overflow-y-auto px-6 pb-8 pt-6">
+            <div className="flex flex-1 flex-col justify-between overflow-y-auto px-6 pb-8 pt-4">
               <nav className="flex flex-col gap-1">
+                <div className="mb-2 flex items-center gap-2 rounded-lg bg-gold/10 border border-gold/30 px-3 py-1.5 text-xs text-gold">
+                  <Sparkles className="size-3.5" />
+                  <span>Owner: <strong>Atiq Butt</strong> · 0313-7526305</span>
+                </div>
+
                 {primaryLinks.map((link, i) => (
                   <motion.div
                     key={link.href}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.04 * i }}
+                    transition={{ delay: 0.03 * i }}
                   >
                     <Link
                       href={link.href}
                       className={cn(
-                        "block border-b border-border/60 py-4 text-3xl font-semibold tracking-tight transition-colors",
+                        "block border-b border-border/50 py-3.5 text-2xl font-bold tracking-tight transition-colors",
                         isActive(link.href) ? "text-gold" : "text-foreground",
                       )}
                     >
@@ -145,12 +137,12 @@ export function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
-                <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
                   {secondaryLinks.map((link) => (
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="text-sm text-muted transition-colors hover:text-gold"
+                      className="text-xs text-muted transition-colors hover:text-gold"
                     >
                       {link.label}
                     </Link>
@@ -158,23 +150,21 @@ export function Navbar() {
                 </div>
               </nav>
 
-              <div className="mt-8 space-y-4">
+              <div className="mt-6 space-y-3 pt-4 border-t border-border">
                 <Button href="/book" fullWidth size="lg" leftIcon={<CalendarCheck className="size-5" />}>
-                  Book a Shoot Session
+                  Book Event (Multi-Function)
                 </Button>
-                <div className="flex items-center justify-between text-sm text-muted">
-                  <a href={`tel:${shopSettings.phone}`} className="flex items-center gap-2 hover:text-foreground">
-                    <Phone className="size-4" /> {shopSettings.phone}
-                  </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-2 hover:text-gold"
-                  >
-                    <InstagramIcon className="size-4" /> {shopSettings.social.instagram}
-                  </a>
+                <div className="grid grid-cols-2 gap-2">
+                  <Button href="tel:03137526305" variant="secondary" fullWidth leftIcon={<Phone className="size-4" />}>
+                    Call Atiq Butt
+                  </Button>
+                  <Button href="https://wa.me/923137526305" variant="secondary" fullWidth>
+                    WhatsApp
+                  </Button>
                 </div>
+                <p className="text-center text-xs text-muted">
+                  📍 Main Bazar, New Plaza, Shop No: 2, Pakistan
+                </p>
               </div>
             </div>
           </motion.div>

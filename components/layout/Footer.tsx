@@ -13,7 +13,10 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Logo />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Muhammadi Studio is a premier cinematography and photography production house co-founded by <strong>Attiq Butt</strong> and founded by <strong>Muhammad Usman</strong>. Crafting 4K cinematic wedding movies, royal portraits, and commercial ad campaigns with timeless artistic excellence.
+              <strong>Muhammadi Studio &amp; Event Management</strong> is owned and directed by <strong>Atiq Butt</strong>. Bringing you complete event arrangements, cinema-grade movie setups, 4K studio photography, royal stage decor, and stunning lighting effects.
+            </p>
+            <p className="mt-2 text-xs text-gold font-semibold">
+              &quot;Dream It... We Plan It... You Enjoy It!&quot;
             </p>
             <div className="mt-5 flex items-center gap-3">
               <a

@@ -43,7 +43,7 @@ export function BarberCard({ barber, className }: { barber: Barber; className?: 
           View Profile
         </Button>
         <Button href={`/book?barber=${barber.id}`} size="sm">
-          Book
+          Book Event
         </Button>
       </div>
     </div>

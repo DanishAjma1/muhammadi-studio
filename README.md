@@ -1,37 +1,40 @@
-# 🎬 Muhammadi Studio — High-End Cinematography & Photography Web App
+# 🎬 Muhammadi Studio & Event Management
 
-A complete, full-featured web application for **Muhammadi Studio**, a premier photography, cinematography, and movie production house co-founded by **Attiq Butt** and founded by **Muhammad Usman**.
+A complete, full-featured web application for **Muhammadi Studio & Event Management**, customized with authentic Pakistani wedding and event culture, directed by **Owner Atiq Butt**.
 
 - 🌐 **Live Website**: [https://muhammadi-studio.vercel.app](https://muhammadi-studio.vercel.app)
 - 📦 **GitHub Repository**: [https://github.com/DanishAjma1/muhammadi-studio](https://github.com/DanishAjma1/muhammadi-studio)
-
-> **Client Discovery → Portfolio → Services & Packages → Choose Director / Artist → Schedule Shoot → Book Session → Gmail SMTP Notification → Studio Production Dashboard.**
+- 📍 **Studio Location**: Main Bazar, New Plaza, Shop No: 2, Pakistan
+- 📞 **Helpline & WhatsApp**: `0313-7526305`
+- 💬 **Tagline**: *"Dream It... We Plan It... You Enjoy It! We Make Your Event Unforgettable!"*
 
 ---
 
-## ✨ Features & Highlights
+## ✨ Features & Architecture
 
-- **Bespoke Luxury Visuals**: Signature dark + gold aesthetic tailored for high-end cinema, weddings, fashion editorial, and commercial brand productions.
-- **Co-Founder & Creative Direction**: Featuring Co-Founder & Director of Cinematography **Attiq Butt**, Founder & Master Photographer **Muhammad Usman**, Drone Specialist **Farhan Tariq**, and Fashion Director **Ayesha Noor**.
-- **Gmail Notification System using SMTP**:
-  - Direct integration with Google's SMTP servers (`smtp.gmail.com:465`).
-  - Automated HTML email dispatch with dark + gold Muhammadi Studio branding.
-  - Sends lead alerts to the studio admin and instant confirmation receipts to clients.
-  - Includes smart fallback simulation mode when SMTP credentials are not yet configured in development.
-  - Admin settings panel with a live **"Send Test Gmail Notification"** button.
-- **Multi-Step Production Booking Wizard**:
-  - Step 1: Select signature production package (Wedding Cinema, Royal Bridal Shoot, Commercial Film, Studio Portraits, 4K Drone).
-  - Step 2: Choose Lead Artist / Director (Attiq Butt, Muhammad Usman, Farhan Tariq, Ayesha Noor, or Any Available).
-  - Step 3: Date selection.
-  - Step 4: Available call times.
-  - Step 5: Contact details, venue notes, and instant confirmation.
-- **Client Portal**: Dashboard, shoot reservations, rescheduling, and profile management.
-- **Studio Admin Portal**:
-  - Live production KPIs and revenue trends.
-  - Call-sheet calendar (day & week views).
-  - Complete CRUD for production packages and team members.
-  - Gmail SMTP configuration status card and live test tool.
-  - Client database and review moderation.
+1. **Authentic Pakistani Cultural Alignment**:
+   - Replaced all Western tropes and random stock imagery with authentic Pakistani event setups extracted directly from the official flyer.
+   - Core Setups: **Movie Setup (Cinema Like Experience)**, **Studio Setup (Professional Photography & Video Shoots)**, **Event Decoration (Beautiful & Unique Decorations)**, and **Lighting Setup (Stunning Lighting Effects)**.
+   - Pakistani Event Occasions: **Wedding Barat & Walima**, **Mehndi & Qawwali Night**, **Mangni (Engagement)**, **Birthday Parties**, **Corporate Events**, and **Special Occasions**.
+
+2. **Always-Visible Sticky Navbar**:
+   - High-contrast, sticky navigation bar (`top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-xl shadow-lg`) permanently on display across all scroll positions.
+   - Includes quick-dial button for `0313-7526305` and a responsive mobile drawer.
+
+3. **Multi-Function Booking (No Pricing / Custom Quotes)**:
+   - Pricing has been removed across all function cards. Every function displays rich details and a **Custom Quote** badge.
+   - Clients can multi-select multiple functions and setups in a single booking inquiry (e.g., Barat + Movie Setup + Event Decoration).
+   - Time slots tailored to Pakistani event timings: Morning Session, Lunch Reception, Evening Barat, Night Walima/Qawwali, and Full Day Coverage.
+
+4. **Admin Approval & Email Confirmation Workflow (Gmail SMTP)**:
+   - Client inquiries are created with `pending` status.
+   - Admin (Atiq Butt) logs into `/admin/appointments` to review details, client contact, venue city, and notes.
+   - Clicking **"Review & Approve"** marks the booking as confirmed and triggers an automated, branded HTML confirmation email to the client containing:
+     - Official Studio Confirmation badge
+     - List of all approved functions & setups
+     - Event date, session timing, and venue location
+     - Studio helpline (`0313-7526305`) and location (`Main Bazar, New Plaza, Shop No: 2`)
+   - Smart development simulation mode with console logs when SMTP credentials are not yet configured.
 
 ---
 
@@ -41,54 +44,36 @@ To activate live email notifications via Google's SMTP:
 
 1. Open your **Google Account** ([https://myaccount.google.com/](https://myaccount.google.com/)).
 2. Navigate to **Security** and ensure **2-Step Verification** is enabled.
-3. Search for **"App passwords"** in the top search bar (or under 2-Step Verification).
+3. Search for **"App passwords"** in the top search bar.
 4. Enter an App Name (e.g., `Muhammadi Studio`) and click **Create**.
-5. Google will display a 16-character code (e.g., `abcd efgh ijkl mnop`).
-6. Copy that code and paste it into your `.env.local` file:
+5. Copy the 16-character code into your `.env.local`:
 
 ```env
 GMAIL_USER=your_email@gmail.com
 GMAIL_APP_PASSWORD=abcd efgh ijkl mnop
-NOTIFICATION_RECIPIENT=attiq@muhammadistudio.com
-SMTP_FROM_NAME="Muhammadi Studio"
+NOTIFICATION_RECIPIENT=atiq@muhammadistudio.com
+SMTP_FROM_NAME="Muhammadi Studio & Event Management"
 ```
-
-*(Note: Spaces in the password are automatically handled).*
 
 ---
 
-## 🔐 Studio Admin Demo Login
+## 🔐 Studio Admin Credentials
 
-The studio dashboard is gated by an administrative login:
+To access the studio control panel (`/admin`):
 
 ```
-Email:    attiq@muhammadistudio.com
+Email:    atiq@muhammadistudio.com
 Password: admin123
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Local Development
 
 ```bash
-# Run development server
+# Run Next.js development server
 npm run dev
-# or: ./node_modules/.bin/next dev
 
-# Production build
-npm run build
-# or: ./node_modules/.bin/next build
-
-# Start production server
-npm start
-# or: ./node_modules/.bin/next start
+# Open in browser:
+http://localhost:3000
 ```
-
----
-
-## 🧱 Tech Stack
-
-- **Framework**: Next.js 16 (App Router)
-- **UI & State**: React 19, Tailwind CSS v4, Zustand, Motion
-- **Mailing**: Nodemailer (Gmail SMTP: `smtp.gmail.com`)
-- **Visuals & Charts**: Lucide React, Recharts

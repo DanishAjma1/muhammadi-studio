@@ -7,6 +7,7 @@ export async function POST(request: Request) {
     const {
       bookingId,
       serviceName,
+      functions,
       price,
       barberName,
       date,
@@ -15,28 +16,40 @@ export async function POST(request: Request) {
       clientName,
       clientPhone,
       clientEmail,
+      venue,
       notes,
     } = body;
 
-    if (!bookingId || !serviceName || !date || !time || !clientName || !clientPhone) {
+    const resolvedService =
+      serviceName || (Array.isArray(functions) && functions.length > 0 ? functions.join(" + ") : "Complete Event Arrangement");
+
+    if (!bookingId || !date || !time || !clientName || !clientPhone) {
       return NextResponse.json(
-        { success: false, error: "Missing required booking details." },
+        { success: false, error: "Missing required booking details (Date, Time, Name, or Phone)." },
         { status: 400 }
       );
     }
 
+    const combinedNotes = [
+      venue ? `Venue / Location: ${venue}` : "",
+      Array.isArray(functions) && functions.length > 0 ? `Selected Functions: ${functions.join(", ")}` : "",
+      notes || "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
     const result = await sendBookingNotification({
       bookingId: String(bookingId),
-      serviceName: String(serviceName),
+      serviceName: String(resolvedService),
       price: Number(price) || 0,
-      barberName: String(barberName || "Muhammadi Studio Director"),
+      barberName: String(barberName || "Atiq Butt (Owner & Event Director)"),
       date: String(date),
       time: String(time),
-      durationMin: Number(durationMin) || 60,
+      durationMin: Number(durationMin) || 180,
       clientName: String(clientName),
       clientPhone: String(clientPhone),
       clientEmail: clientEmail ? String(clientEmail).trim() : undefined,
-      notes: notes ? String(notes).trim() : undefined,
+      notes: combinedNotes ? String(combinedNotes).trim() : undefined,
     });
 
     return NextResponse.json(result);

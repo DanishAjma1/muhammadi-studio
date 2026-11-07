@@ -19,8 +19,8 @@ export function Logo({ className, compact }: { className?: string; compact?: boo
           <span className="heading text-lg font-extrabold uppercase tracking-tight text-foreground">
             Muhammadi<span className="text-gold">Studio</span>
           </span>
-          <span className="text-[9px] uppercase tracking-widest text-muted font-medium">
-            Films &amp; Photography
+          <span className="text-[9px] uppercase tracking-widest text-gold font-medium">
+            Events &amp; Photography
           </span>
         </span>
       )}

@@ -16,7 +16,7 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Get in Touch"
         title="Contact &amp; Studio Location"
-        subtitle="Visit our soundstage, book a creative consultation with Co-Founder Attiq Butt, or send us a message with instant Gmail notification."
+        subtitle="Visit our office at Main Bazar, New Plaza, Shop No: 2, consult directly with Owner Atiq Butt, or send us an inquiry."
       />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
@@ -28,9 +28,9 @@ export default function ContactPage() {
                 Directions
               </Button>
               <Button href={`tel:${shopSettings.phone}`} variant="secondary" leftIcon={<Phone className="size-4" />}>
-                Call Studio
+                Call Atiq Butt
               </Button>
-              <Button href="https://wa.me/15558407890" variant="secondary" leftIcon={<MessageCircle className="size-4" />}>
+              <Button href="https://wa.me/923137526305" variant="secondary" leftIcon={<MessageCircle className="size-4" />}>
                 WhatsApp
               </Button>
             </div>
@@ -38,10 +38,11 @@ export default function ContactPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <Reveal className="rounded-2xl border border-border bg-card p-6">
                 <MapPin className="mb-3 size-5 text-gold" />
-                <h3 className="font-semibold text-foreground">Studio Address</h3>
-                <p className="mt-1 text-sm text-muted">{shopSettings.address}</p>
-                <p className="mt-3 text-sm text-muted">{shopSettings.phone}</p>
-                <p className="text-sm text-muted">{shopSettings.email}</p>
+                <h3 className="font-semibold text-foreground">Studio Location</h3>
+                <p className="mt-1 text-sm font-medium text-foreground">{shopSettings.address}</p>
+                <p className="mt-2 text-sm text-gold font-semibold">📞 {shopSettings.phone}</p>
+                <p className="text-xs text-muted mt-1">Owner: Atiq Butt</p>
+                <p className="text-xs text-muted">{shopSettings.email}</p>
               </Reveal>
               <Reveal delay={0.1} className="rounded-2xl border border-border bg-card p-6">
                 <Clock className="mb-3 size-5 text-gold" />

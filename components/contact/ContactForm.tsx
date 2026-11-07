@@ -6,13 +6,16 @@ import { Button, Input, Select, TextArea, useToast } from "@/components/core";
 import { services } from "@/data";
 
 const topicOptions = [
-  { label: "General Production Enquiry", value: "General Enquiry" },
-  { label: "Wedding Film & Photography Package", value: "Wedding Cinema & Photo" },
-  { label: "Commercial Brand Video / Ad Campaign", value: "Commercial Brand Film" },
-  { label: "Studio Portrait & Executive Headshots", value: "Studio Portraits" },
-  { label: "Music Video Production", value: "Music Video" },
-  { label: "Drone & Aerial 4K Coverage", value: "Drone Cinematography" },
-  ...services.map((s) => ({ label: s.name, value: s.name })),
+  { label: "General Event Inquiry", value: "General Event Inquiry" },
+  { label: "Movie Setup (Cinema Like Experience)", value: "Movie Setup" },
+  { label: "Studio Setup (4K Photography & Video)", value: "Studio Setup" },
+  { label: "Event Decoration (Stage & Floral Decor)", value: "Event Decoration" },
+  { label: "Lighting Setup (Moving Heads & Beams)", value: "Lighting Setup" },
+  { label: "Wedding Arrangement (Barat & Walima)", value: "Wedding (Barat & Walima)" },
+  { label: "Mehndi / Mayun / Qawwali Night", value: "Mehndi / Qawwali Night" },
+  { label: "Mangni (Engagement Ceremony)", value: "Mangni (Engagement)" },
+  { label: "Birthday Party Arrangement", value: "Birthday Party" },
+  { label: "Corporate Event & Conference", value: "Corporate Event" },
 ];
 
 export function ContactForm() {

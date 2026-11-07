@@ -3,7 +3,7 @@
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const STEPS = ["Service", "Barber", "Date", "Time", "Details"];
+const STEPS = ["Functions & Setups", "Director", "Date", "Time", "Details"];
 
 export function BookingStepper({ current }: { current: number }) {
   return (

@@ -26,10 +26,10 @@ export const revenueByDay: RevenuePoint[] = [
 ];
 
 export const serviceBreakdown: BreakdownPoint[] = [
-  { name: "Wedding Cinema", value: 48 },
-  { name: "Bridal & Stills", value: 26 },
-  { name: "Commercial & Ads", value: 16 },
-  { name: "Drone & Aerial", value: 10 },
+  { name: "Wedding Arrangements", value: 45 },
+  { name: "Movie & Big Screen Setups", value: 25 },
+  { name: "Event Stage Decoration", value: 20 },
+  { name: "Concert Lighting Setups", value: 10 },
 ];
 
 export const trafficSources: TrafficSource[] = [

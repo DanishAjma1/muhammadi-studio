@@ -5,18 +5,18 @@ export interface NavLink {
 
 // Primary links shown in the desktop navbar
 export const primaryLinks: NavLink[] = [
-  { href: "/services", label: "Services" },
-  { href: "/cinematographers", label: "Cinematographers" },
-  { href: "/gallery", label: "Portfolio" },
+  { href: "/services", label: "Setups & Functions" },
+  { href: "/gallery", label: "Decor & Portfolio" },
+  { href: "/cinematographers", label: "Meet Atiq Butt" },
   { href: "/reviews", label: "Reviews" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/about", label: "About Studio" },
+  { href: "/contact", label: "Contact & Location" },
 ];
 
 // Secondary links surfaced in the mobile menu + footer
 export const secondaryLinks: NavLink[] = [
   { href: "/faq", label: "FAQ" },
-  { href: "/blog", label: "Cinema Insights" },
+  { href: "/blog", label: "Event Stories" },
   { href: "/social", label: "Instagram" },
   { href: "/account", label: "Client Portal" },
   { href: "/admin", label: "Studio Admin" },
@@ -24,30 +24,30 @@ export const secondaryLinks: NavLink[] = [
 
 export const footerColumns: { title: string; links: NavLink[] }[] = [
   {
-    title: "Production",
+    title: "Event Arrangements",
     links: [
-      { href: "/services", label: "Films & Photography" },
-      { href: "/cinematographers", label: "Directors & Artists" },
-      { href: "/gallery", label: "Visual Portfolio" },
-      { href: "/book", label: "Book a Shoot" },
+      { href: "/services", label: "Movie & Studio Setup" },
+      { href: "/services#event-decoration", label: "Event Decoration" },
+      { href: "/services#lighting-setup", label: "Stunning Lighting" },
+      { href: "/book", label: "Book Multi-Function Event" },
     ],
   },
   {
     title: "Muhammadi Studio",
     links: [
-      { href: "/about", label: "Our Story & Co-Founders" },
+      { href: "/about", label: "Atiq Butt (Owner)" },
+      { href: "/cinematographers", label: "Directors & Team" },
       { href: "/reviews", label: "Client Reviews" },
-      { href: "/blog", label: "Cinema Insights" },
-      { href: "/contact", label: "Contact & Location" },
+      { href: "/contact", label: "Main Bazar Office" },
     ],
   },
   {
-    title: "Client Portal",
+    title: "Studio Portal",
     links: [
-      { href: "/account", label: "Dashboard" },
-      { href: "/account/appointments", label: "My Shoot Bookings" },
-      { href: "/login", label: "Sign In" },
-      { href: "/admin", label: "Studio Admin" },
+      { href: "/book", label: "Book an Event" },
+      { href: "/account", label: "Client Account" },
+      { href: "/admin", label: "Admin Dashboard" },
+      { href: "/admin/appointments", label: "Approve Bookings" },
     ],
   },
 ];

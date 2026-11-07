@@ -1,21 +1,30 @@
 "use client";
 
 import { motion } from "motion/react";
-import { CalendarPlus, Camera, Check, Clock, MailCheck, MapPin, Navigation, User } from "lucide-react";
+import {
+  CalendarPlus,
+  Check,
+  Clock,
+  MailCheck,
+  MapPin,
+  Phone,
+  User,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/core";
 import { useBookingStore } from "@/store/bookingStore";
 import { shopSettings } from "@/data";
-import { formatCurrency, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 
 function toDate(dateIso: string, time: string) {
   const [t, ap] = time.split(" ");
-  const [hRaw, m] = t.split(":").map(Number);
+  const [hRaw, m] = t ? t.split(":").map(Number) : [10, 0];
   let h = hRaw;
   if (ap === "PM" && h !== 12) h += 12;
   if (ap === "AM" && h === 12) h = 0;
   const [y, mo, d] = dateIso.split("-").map(Number);
-  return new Date(y, mo - 1, d, h, m);
+  return new Date(y, mo - 1, d, h, m || 0);
 }
 const pad = (n: number) => String(n).padStart(2, "0");
 const gcal = (d: Date) =>
@@ -27,21 +36,21 @@ export default function BookingSuccessPage() {
   if (!booking) {
     return (
       <div className="mx-auto max-w-md px-4 pt-40 pb-24 text-center">
-        <h1 className="heading text-2xl text-foreground">No booking found</h1>
-        <p className="mt-2 text-muted">Looks like you haven&apos;t booked a shoot yet.</p>
+        <h1 className="heading text-2xl text-foreground">No booking request found</h1>
+        <p className="mt-2 text-muted">You haven&apos;t submitted an event booking request yet.</p>
         <Button href="/book" className="mt-6">
-          Book a production session
+          Book an Event or Setup
         </Button>
       </div>
     );
   }
 
-  const start = toDate(booking.date, booking.time);
-  const end = new Date(start.getTime() + booking.durationMin * 60000);
+  const start = toDate(booking.date, booking.time || "10:00 AM");
+  const end = new Date(start.getTime() + (booking.durationMin || 180) * 60000);
   const calUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
     `${booking.serviceName} — ${shopSettings.name}`,
-  )}&dates=${gcal(start)}/${gcal(end)}&location=${encodeURIComponent(shopSettings.address)}&details=${encodeURIComponent(
-    `Production session directed by ${booking.barberName}`,
+  )}&dates=${gcal(start)}/${gcal(end)}&location=${encodeURIComponent("Main Bazar, New Plaza, Shop No: 2, Pakistan")}&details=${encodeURIComponent(
+    `Event arrangement managed by Atiq Butt (Owner). Helpline: 0313-7526305`,
   )}`;
 
   return (
@@ -50,9 +59,9 @@ export default function BookingSuccessPage() {
         initial={{ scale: 0, rotate: -20 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: "spring", stiffness: 260, damping: 18 }}
-        className="mx-auto flex size-20 items-center justify-center rounded-full bg-success/15 text-success"
+        className="mx-auto flex size-20 items-center justify-center rounded-full bg-gold/15 text-gold border-2 border-gold/40 shadow-lg"
       >
-        <Check className="size-10" strokeWidth={3} />
+        <Sparkles className="size-10" />
       </motion.div>
 
       <motion.div
@@ -61,14 +70,16 @@ export default function BookingSuccessPage() {
         transition={{ delay: 0.15 }}
         className="mt-6 text-center"
       >
-        <p className="eyebrow mb-2">Shoot Reserved</p>
-        <h1 className="heading text-3xl text-foreground sm:text-4xl">Session Confirmed!</h1>
-        <p className="mt-3 text-muted">
-          A confirmation and production sheet notification has been sent via Gmail SMTP. We can&apos;t wait to bring your vision to life on set.
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 border border-amber-500/40 px-3 py-1 text-xs font-semibold text-amber-400 mb-2">
+          <span>⏳ Pending Studio Approval</span>
+        </div>
+        <h1 className="heading text-3xl text-foreground sm:text-4xl">Booking Request Received!</h1>
+        <p className="mt-3 text-sm text-muted leading-relaxed">
+          Thank you, <strong>{booking.customerName}</strong>! Your event booking has been submitted directly to Owner <strong>Atiq Butt</strong>. Once approved, you will receive an official <strong>Confirmation Email</strong> with full arrangement details.
         </p>
         <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs text-gold">
           <MailCheck className="size-4" />
-          <span>Notification dispatched to {shopSettings.name} lead team</span>
+          <span>Notification dispatched to Atiq Butt &amp; Studio Team</span>
         </div>
       </motion.div>
 
@@ -76,37 +87,46 @@ export default function BookingSuccessPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.25 }}
-        className="mt-8 overflow-hidden rounded-2xl border border-border bg-card"
+        className="mt-8 overflow-hidden rounded-2xl border border-border bg-card shadow-xl"
       >
         <div className="border-b border-border bg-secondary px-6 py-4">
-          <p className="heading text-xl text-foreground">{booking.serviceName}</p>
-          <p className="text-sm text-gold">{formatCurrency(booking.price)}</p>
+          <p className="text-xs uppercase font-semibold text-gold tracking-wider">Booked Function(s) &amp; Setups</p>
+          <p className="heading text-lg text-foreground mt-1">{booking.serviceName}</p>
         </div>
         <dl className="space-y-3 px-6 py-5 text-sm">
-          <Row icon={<User className="size-4" />} label="Lead Artist" value={booking.barberName} />
-          <Row icon={<Camera className="size-4" />} label="Date" value={formatDate(booking.date, "weekday")} />
-          <Row icon={<Clock className="size-4" />} label="Call Time" value={`${booking.time} · ${booking.durationMin} min`} />
-          <Row icon={<MapPin className="size-4" />} label="Location" value={`${shopSettings.name}, ${shopSettings.address}`} />
+          <Row icon={<User className="size-4" />} label="Lead Director" value={booking.barberName || "Atiq Butt (Owner)"} />
+          <Row icon={<CalendarPlus className="size-4" />} label="Event Date" value={formatDate(booking.date, "weekday")} />
+          <Row icon={<Clock className="size-4" />} label="Call Session" value={booking.time} />
+          <Row icon={<MapPin className="size-4" />} label="Studio Office" value="Main Bazar, New Plaza, Shop No: 2" />
+          {booking.venueCity && (
+            <Row icon={<MapPin className="size-4" />} label="Event Venue" value={booking.venueCity} />
+          )}
+          <Row
+            icon={<Phone className="size-4" />}
+            label="Direct Contact"
+            value="0313-7526305 (Atiq Butt)"
+          />
         </dl>
       </motion.div>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
+        <Button href="tel:03137526305" variant="secondary" leftIcon={<Phone className="size-4" />}>
+          Call Atiq Butt
+        </Button>
         <Button href={calUrl} variant="secondary" leftIcon={<CalendarPlus className="size-4" />}>
           Add to calendar
         </Button>
-        <Button href="https://maps.google.com" variant="secondary" leftIcon={<Navigation className="size-4" />}>
-          Studio directions
-        </Button>
       </div>
-      <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-        <Button href="/account/appointments" fullWidth>
-          View my shoot bookings
+
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+        <Button href="https://wa.me/923137526305" fullWidth>
+          WhatsApp Atiq Butt
         </Button>
         <Link
           href="/"
           className="flex h-11 flex-1 items-center justify-center rounded-full text-sm text-muted transition-colors hover:text-foreground"
         >
-          Back to home
+          Back to Home
         </Link>
       </div>
     </div>
@@ -117,8 +137,8 @@ function Row({ icon, label, value }: { icon: React.ReactNode; label: string; val
   return (
     <div className="flex items-center gap-3">
       <span className="text-gold">{icon}</span>
-      <span className="w-24 text-muted">{label}</span>
-      <span className="flex-1 text-right font-medium text-foreground">{value}</span>
+      <span className="w-28 text-xs text-muted">{label}</span>
+      <span className="flex-1 text-right text-xs font-medium text-foreground">{value}</span>
     </div>
   );
 }

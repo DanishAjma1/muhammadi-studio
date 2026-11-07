@@ -2,19 +2,22 @@
 // Domain types for Muhammadi Studio (Photography & Movie Production)
 // ============================================================
 
-export type ServiceCategory = "photography" | "cinematography" | "commercial" | "package";
+export type ServiceCategory = "setup" | "function" | "photography" | "cinematography" | "package";
 
 export interface Service {
   id: string;
   slug: string;
   name: string;
+  tagline?: string;
   description: string;
   price: number;
+  pricingNote?: string;
   durationMin: number;
   category: ServiceCategory;
   popular?: boolean;
   includes?: string[];
-  image?: string;
+  image: string;
+  flyerCard?: string;
   active: boolean;
 }
 
@@ -71,17 +74,23 @@ export interface Appointment {
   customerId: string;
   customerName: string;
   customerPhone: string;
+  customerEmail?: string;
   customerAvatar?: string;
   barberId: string;
   barberName: string;
   serviceId: string;
   serviceName: string;
+  functionIds?: string[];
+  functionNames?: string[];
+  venueCity?: string;
   date: string; // ISO yyyy-mm-dd
-  time: string; // "10:30 AM"
+  time: string; // "10:30 AM" or "Evening Function"
   durationMin: number;
   price: number;
   status: AppointmentStatus;
   notes?: string;
+  adminNotes?: string;
+  confirmedAt?: string;
   source: LeadSource;
   createdAt: string;
 }
@@ -155,6 +164,8 @@ export interface OpeningHour {
 export interface ShopSettings {
   name: string;
   tagline: string;
+  slogan?: string;
+  owner?: string;
   coFounder: string;
   founder: string;
   address: string;

@@ -78,7 +78,7 @@ export default function ProfilePage() {
             <dl className="mt-4 grid gap-4 sm:grid-cols-2">
               <Detail icon={<Mail className="size-4" />} label="Email" value={user?.email} />
               <Detail icon={<Phone className="size-4" />} label="Phone" value={user?.phone} />
-              <Detail icon={<Star className="size-4" />} label="Preferred barber" value={favBarber?.name ?? "No preference"} />
+              <Detail icon={<Star className="size-4" />} label="Preferred Director" value={favBarber?.name ?? "No preference"} />
               <Detail icon={<Scissors className="size-4" />} label="Preferred service" value={favService?.name ?? "No preference"} />
             </dl>
           </div>
@@ -142,7 +142,7 @@ export default function ProfilePage() {
             <Input label="Phone" value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} />
           </div>
           <Select
-            label="Preferred barber"
+            label="Preferred Lead Director"
             options={barberOptions}
             value={form.favoriteBarberId || null}
             onChange={(v) => setForm((f) => ({ ...f, favoriteBarberId: v }))}

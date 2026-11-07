@@ -12,9 +12,9 @@ export default function CinematographersPage() {
   return (
     <>
       <PageHeader
-        eyebrow="The Creative Team"
-        title="Directors &amp; Master Photographers"
-        subtitle="Led by Co-Founder Attiq Butt and Founder Muhammad Usman, our team brings together award-winning cinematographers, licensed drone pilots, and editorial colorists."
+        eyebrow="Event Leadership &amp; Cinematography"
+        title="Meet Atiq Butt &amp; Production Directors"
+        subtitle="Led by Owner Atiq Butt, our experienced event management, lighting specialists, and cinema crew ensure every Pakistani celebration is managed with royal excellence."
         image={img.heroPrimary}
       />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
