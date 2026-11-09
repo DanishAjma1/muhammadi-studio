@@ -1,79 +1,110 @@
-# 🎬 Muhammadi Studio & Event Management
+# 🎬 Muhammadi Studio — Event Booking & Media Pipeline Platform
 
-A complete, full-featured web application for **Muhammadi Studio & Event Management**, customized with authentic Pakistani wedding and event culture, directed by **Owner Atiq Butt**.
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16.3_(App_Router)-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js 16" />
+  <img src="https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" />
+  <img src="https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Bun-1.3-FBF0DF?style=for-the-badge&logo=bun&logoColor=black" alt="Bun" />
+  <img src="https://img.shields.io/badge/TanStack_Table-9.1-FF4154?style=for-the-badge&logo=tanstack&logoColor=white" alt="TanStack Table" />
+  <img src="https://img.shields.io/badge/ExcelJS-Automated_Export-217346?style=for-the-badge&logo=microsoftexcel&logoColor=white" alt="ExcelJS" />
+  <img src="https://img.shields.io/badge/Nodemailer-SMTP_Workflows-007ACC?style=for-the-badge" alt="Nodemailer" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS v4" />
+</p>
+<br/>
 
-- 🌐 **Live Website**: [https://muhammadi-studio.vercel.app](https://muhammadi-studio.vercel.app)
-- 📦 **GitHub Repository**: [https://github.com/DanishAjma1/muhammadi-studio](https://github.com/DanishAjma1/muhammadi-studio)
-- 📍 **Studio Location**: Main Bazar, New Plaza, Shop No: 2, Pakistan
-- 📞 **Helpline & WhatsApp**: `0313-7526305`
-- 💬 **Tagline**: *"Dream It... We Plan It... You Enjoy It! We Make Your Event Unforgettable!"*
-
----
-
-## ✨ Features & Architecture
-
-1. **Authentic Pakistani Cultural Alignment**:
-   - Replaced all Western tropes and random stock imagery with authentic Pakistani event setups extracted directly from the official flyer.
-   - Core Setups: **Movie Setup (Cinema Like Experience)**, **Studio Setup (Professional Photography & Video Shoots)**, **Event Decoration (Beautiful & Unique Decorations)**, and **Lighting Setup (Stunning Lighting Effects)**.
-   - Pakistani Event Occasions: **Wedding Barat & Walima**, **Mehndi & Qawwali Night**, **Mangni (Engagement)**, **Birthday Parties**, **Corporate Events**, and **Special Occasions**.
-
-2. **Always-Visible Sticky Navbar**:
-   - High-contrast, sticky navigation bar (`top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-xl shadow-lg`) permanently on display across all scroll positions.
-   - Includes quick-dial button for `0313-7526305` and a responsive mobile drawer.
-
-3. **Multi-Function Booking (No Pricing / Custom Quotes)**:
-   - Pricing has been removed across all function cards. Every function displays rich details and a **Custom Quote** badge.
-   - Clients can multi-select multiple functions and setups in a single booking inquiry (e.g., Barat + Movie Setup + Event Decoration).
-   - Time slots tailored to Pakistani event timings: Morning Session, Lunch Reception, Evening Barat, Night Walima/Qawwali, and Full Day Coverage.
-
-4. **Admin Approval & Email Confirmation Workflow (Gmail SMTP)**:
-   - Client inquiries are created with `pending` status.
-   - Admin (Atiq Butt) logs into `/admin/appointments` to review details, client contact, venue city, and notes.
-   - Clicking **"Review & Approve"** marks the booking as confirmed and triggers an automated, branded HTML confirmation email to the client containing:
-     - Official Studio Confirmation badge
-     - List of all approved functions & setups
-     - Event date, session timing, and venue location
-     - Studio helpline (`0313-7526305`) and location (`Main Bazar, New Plaza, Shop No: 2`)
-   - Smart development simulation mode with console logs when SMTP credentials are not yet configured.
+> **Muhammadi Studio** is a high-performance cinematography, photography, and event management platform built on Next.js 16 and Bun. It features automated slot conflict resolution, multi-tier staff booking, automated Excel ledger generation, and transactional Gmail SMTP client notifications.
 
 ---
 
-## 📧 Gmail SMTP Setup Instructions
+## 🏗️ System Architecture
 
-To activate live email notifications via Google's SMTP:
+```mermaid
+flowchart TD
+    subgraph ClientExperience ["Client & Public Experience"]
+        PublicBooking["Interactive Booking Portal (Appointments / Dates)"]
+        MediaGallery["High-Res Cinematography & Portfolio Showcase"]
+        ClientAccount["Client Account & Booking Status Dashboard"]
+    end
 
-1. Open your **Google Account** ([https://myaccount.google.com/](https://myaccount.google.com/)).
-2. Navigate to **Security** and ensure **2-Step Verification** is enabled.
-3. Search for **"App passwords"** in the top search bar.
-4. Enter an App Name (e.g., `Muhammadi Studio`) and click **Create**.
-5. Copy the 16-character code into your `.env.local`:
+    subgraph ServerRuntime ["Next.js 16 Server Architecture (Bun Runtime)"]
+        RouteHandlers["Next.js Server Actions & API Handlers"]
+        SlotResolver["Slot Conflict & Availability Engine"]
+        ExcelPipeline["ExcelJS Financial Ledger Exporter"]
+        EmailWorker["Nodemailer Transactional SMTP Queue"]
+    end
 
-```env
-GMAIL_USER=your_email@gmail.com
-GMAIL_APP_PASSWORD=abcd efgh ijkl mnop
-NOTIFICATION_RECIPIENT=atiq@muhammadistudio.com
-SMTP_FROM_NAME="Muhammadi Studio & Event Management"
+    subgraph AdministrativeLayer ["Studio Operations & Analytics"]
+        AdminDashboard["Studio Management & Schedule Matrix"]
+        StaffScheduler["Cinematographer & Crew Assignment Console"]
+        RevenueAnalytics["Recharts Revenue & Booking Distribution"]
+    end
+
+    PublicBooking --> RouteHandlers
+    MediaGallery --> RouteHandlers
+    ClientAccount --> RouteHandlers
+
+    RouteHandlers --> SlotResolver
+    SlotResolver --> AdminDashboard
+    SlotResolver --> StaffScheduler
+
+    AdminDashboard --> ExcelPipeline
+    RouteHandlers --> EmailWorker
+    AdminDashboard --> RevenueAnalytics
 ```
 
 ---
 
-## 🔐 Studio Admin Credentials
+## ⚡ Core Engineering Highlights
 
-To access the studio control panel (`/admin`):
+- **Bun-Powered Performance**: Fast builds, rapid server-side rendering, and low memory footprint utilizing Bun runtime dependencies and scripts.
+- **Dynamic Scheduling & Conflict Guard**: Custom scheduling algorithms preventing double bookings across multi-day weddings, studio photo shoots, and cinematographer crews.
+- **Automated Financial Reporting Pipeline**: Integrated `exceljs` pipeline compiling client invoices, advance deposits, remaining balances, and crew payouts into styled Excel spreadsheets.
+- **Transactional SMTP Notification Engine**: Automated confirmation emails and schedule updates with branded HTML templates dispatched via Nodemailer.
+- **Data-Dense Administration**: High-throughput admin tables powered by TanStack Table supporting column filtering, sorting, pagination, and status badge updates.
 
-```
-Email:    atiq@muhammadistudio.com
-Password: admin123
+---
+
+## 📁 Repository Structure
+
+```text
+app/
+  (public)/             Public customer routes (Booking, Gallery, Cinematographers)
+  account/              Client appointment management and profile settings
+  api/                  Route handlers for bookings, contact forms, and Excel exports
+lib/                    ExcelJS report builder, Nodemailer transport, and Zod schemas
 ```
 
 ---
 
-## 🚀 Local Development
+## 🚀 Quick Start & Local Setup
 
+### Prerequisites
+- Bun >= 1.2.0 (or Node.js >= 20.0.0)
+
+### 1. Installation
 ```bash
-# Run Next.js development server
-npm run dev
-
-# Open in browser:
-http://localhost:3000
+git clone https://github.com/DanishAjma1/muhammadi-studio.git
+cd muhammadi-studio
+bun install
 ```
+
+### 2. Environment Configuration
+Create a `.env` file in the root directory:
+```env
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT=465
+SMTP_USER="your-studio-email@gmail.com"
+SMTP_PASS="your-app-specific-password"
+NEXT_PUBLIC_BASE_URL="http://localhost:3000"
+```
+
+### 3. Run Development Server
+```bash
+bun run dev
+```
+Visit [http://localhost:3000](http://localhost:3000) to view the studio portal.
+
+---
+
+## 📜 License
+Distributed under the MIT License. Built with passion by [Danish Ajmal](https://github.com/DanishAjma1).
